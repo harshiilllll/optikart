@@ -1,0 +1,101 @@
+.navbar {
+    height: 60px;
+    padding-inline: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 20px 5px rgba(0 0 0 / 50%);
+    z-index: 1000;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(20px);
+    background-color: rgba(255 255 255 / 90%);
+
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        justify-content: space-between;
+        width: 100%;
+        position: relative;
+
+        .left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            .icons {
+                color: #7d7d7d;
+
+                .icon {
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+            }
+
+            .item {
+                list-style: none;
+                font-size: 14px;
+            }
+        }
+
+        .center {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding-left: 60px;
+
+            .logo-img {
+                height: 16px;
+                display: none;
+            }
+            .logo {
+                color: #333;
+                text-decoration: none;
+                font-size: 18px;
+                letter-spacing: 1px;
+                font-family: 'Shrikhand', cursive;
+            }
+        }
+
+        .right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            .icons {
+                display: flex;
+                gap: 10px;
+                color: #7d7d7d;
+
+                .icon {
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+
+                .cart-icon {
+                    position: relative;
+
+                    span {
+                        position: absolute;
+                        top: -3px;
+                        right: -3px;
+                        background-color: #2879fe;
+                        color: white;
+                        font-size: 10px;
+                        border-radius: 50%;
+                        height: 12px;
+                        width: 12px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+
+            .item {
+                list-style: none;
+                font-size: 14px;
+            }
+        }
+    }
+}
