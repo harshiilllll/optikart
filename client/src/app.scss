@@ -44,3 +44,17 @@ code {
   text-decoration: none;
   color: black;
 }
+
+.logo {
+  color: #333;
+  text-decoration: none;
+  font-size: 22px;
+  letter-spacing: 1px;
+  font-family: "Urbanist", sans-serif;
+  font-weight: 600;
+
+  &::after{
+    content: ".";
+    font-weight: 900;
+  }
+}

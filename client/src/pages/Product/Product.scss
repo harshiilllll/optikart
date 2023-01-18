@@ -1,0 +1,123 @@
+.product {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+
+  .images {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 40px;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 40vw;
+      object-fit: cover;
+      transition: all 0.5s ease;
+      &:hover {
+        width: 42vw;
+      }
+    }
+  }
+
+  .info {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-left: 1px solid lightgray;
+
+    .productTitle {
+      font-size: 32px;
+      font-weight: 100;
+      margin-bottom: 20px;
+    }
+
+    .productDesc {
+      line-height: 22px;
+      font-weight: 300;
+    }
+
+    .price {
+      display: flex;
+      gap: 10px;
+
+      h1 {
+        font-weight: 600;
+        font-size: 22px;
+
+        &:first-child {
+          font-weight: 200;
+          color: gray;
+          text-decoration: line-through;
+          font-size: 18px;
+        }
+      }
+    }
+
+    .options {
+      display: flex;
+      gap: 20px;
+
+      .colors {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .color {
+          height: 15px;
+          width: 15px;
+          border-radius: 50%;
+          cursor: pointer;
+          border: 1px solid #333;
+        }
+      }
+
+      .size {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+      }
+    }
+
+    .buttons{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 40px;
+
+        button {
+            border: none;
+            outline: none;
+            cursor: pointer;
+            display: flex;
+            min-width: 100px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .buy-btn {
+            background-color: teal;
+            color: white;
+
+            &:hover {
+                background-color: rgb(0, 70, 70);
+            }
+        }
+
+        .cart-btn {
+            background-color: rgb(214, 240, 216);
+
+            &:hover {
+                background-color: rgb(165, 203, 169);
+            }
+        }
+    }
+  }
+}

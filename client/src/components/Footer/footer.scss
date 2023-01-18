@@ -36,15 +36,12 @@
     justify-content: space-between;
     width: 100%;
     border-top: 1px solid #777;
+    height: 70px;
 
     .left {
       display: flex;
       align-items: center;
       gap: 10px;
-
-      .logo {
-        font-family: "Shrikhand", cursive;
-      }
     }
 
     img {

@@ -7,10 +7,27 @@ import {
   Search,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleScroll = () => {
+    setScrollPosition(window.pageYOffset);
+  };
+
+  const navbarClass = scrollPosition > 10 ? 'scrolled' : '';
+
+
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${navbarClass}`}>
       <div className="wrapper">
         <ul className="left">
           <div className="icons">

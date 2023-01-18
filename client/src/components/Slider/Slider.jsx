@@ -8,12 +8,12 @@ const Slider = () => {
 
   const data = [
     "https://cdn.discordapp.com/attachments/1064859758068248588/1064861021002547220/harshiilllll_cool_glasses_blue_white_background_product_photosh_558ed372-2f0c-4127-9dec-26070ff6861b.png",
-    "https://images.pexels.com/photos/949670/pexels-photo-949670.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    "https://images.pexels.com/photos/837140/pexels-photo-837140.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://cdn.discordapp.com/attachments/1064859758068248588/1064863484187263046/harshiilllll_product_photoshoot_sunglasses_neat_clean_look_whit_ac1127a3-6f4d-40d1-a656-459a862aedc1.png",
+    "https://cdn.discordapp.com/attachments/1064859758068248588/1065242967339700224/harshiilllll_product_photoshoot_glasses_for_female_neat_clean_l_1c7662df-542d-40cb-aff9-d7a211bb9ef7.png",
   ];
 
   const prevSlide = useCallback(() => {
-    setCurrentSlide(currentSlide === 2 ? 0 : (prev) => prev - 1);
+    setCurrentSlide(currentSlide === 0 ? 2 : (prev) => prev - 1);
   }, [currentSlide]);
 
   const nextSlide = useCallback(() => {

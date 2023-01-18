@@ -1,5 +1,6 @@
 .featuredProducts{
     margin-top: 30px;
+    margin-bottom: 60px;
     padding: 20px 80px;
     display: flex;
     flex-direction: column;
@@ -8,15 +9,28 @@
     .top {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        // border-bottom: 1px solid lightgray;
+        padding-bottom: 20px;
+
+        &::after {
+            content: '';
+            height: 2px;
+            width: 100%;
+            background: linear-gradient(45deg, rgba(0, 128, 128, 0.5) 0%, rgba(0, 45, 45, 0.5) 100%) ;
+            flex: 4;
+            border-radius: 8px;
+        }
 
         h1{
-            flex: 2;
             text-transform: capitalize;
+            font-size: 24px;
+            font-weight: 600;
+            margin-right: 20px;
         }
 
         p{
-            flex: 3;
+            flex: 2;
             color: gray;
         }
     }
@@ -24,5 +38,11 @@
     .bottom {
         display: flex;
         justify-content: space-between;
+        overflow: auto;
+        gap: 10px;
+
+        &::-webkit-scrollbar{
+            display: none;
+        }
     }
 }
