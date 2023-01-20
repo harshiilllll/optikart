@@ -1,3 +1,5 @@
+@import "../../app.scss";
+
 .navbar {
   height: 60px;
   padding-inline: 10px;
@@ -31,9 +33,12 @@
       display: flex;
       align-items: center;
       gap: 20px;
+      @include tablet {
+        display: none;
+      }
 
       .icons {
-        color: #7d7d7d;
+        color: #414141;
 
         .icon {
           font-size: 20px;
@@ -53,6 +58,10 @@
       gap: 5px;
       padding-left: 60px;
 
+      @include tablet {
+        padding-left: 0px;
+      }
+
       .logo-img {
         height: 16px;
         display: none;
@@ -67,7 +76,7 @@
       .icons {
         display: flex;
         gap: 10px;
-        color: #7d7d7d;
+        color: #414141;
 
         .icon {
           font-size: 20px;
@@ -97,7 +106,69 @@
       .item {
         list-style: none;
         font-size: 14px;
+
+        @include tablet {
+          display: none;
+        }
       }
     }
+  }
+}
+
+.hamburger {
+  position: relative;
+  display: none;
+  width: 25px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  outline: none;
+  border: none;
+  overflow: hidden;
+  margin-right: 10px;
+
+  @include tablet {
+    display: block;
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    margin: 6px 0px;
+    transition: 0.4s;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    transform: translateX(-8px);
+  }
+
+  .bar {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    margin: 6px 0px;
+    transition: 0.4s;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    margin: 6px 0px;
+    transition: 0.4s;
+    border-radius: 3px;
+    transform: translateX(-8px);
+    -webkit-border-radius: 3px;
   }
 }

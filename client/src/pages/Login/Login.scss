@@ -1,4 +1,60 @@
-.login{
-    min-height: 100vh;
-    background-color: rebeccapurple;
+.login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(255 255 255 / 50%), rgba(255 255 255 / 50%)), url(https://images.unsplash.com/photo-1617370447481-f4691f05d6f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8b25lfGVufDB8fDB8d2hpdGV8&w=1000&q=80);
+  background-size: cover;
+  background-position: right;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    background-color: white;
+    padding: 30px 50px;
+    width: 30vw;
+    border-radius: 8px;
+    box-shadow: 0 4px 40px 6px rgba(0 0 0 / 50%);
+
+    .inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        input {
+            background-color: rgb(200, 237, 237);
+        }
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    input {
+      padding: 15px 20px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .button{
+        cursor: pointer;
+        background-color: teal;
+        color: white;
+        font-weight: 600;
+        outline: none;
+        transition: all 0.5s ease;
+
+        &:hover {
+            background-color: rgb(0, 68, 68);
+        }
+    }
+
+    .link {
+      text-decoration: underline;
+      margin-left: 5px;
+    }
+  }
 }

@@ -1,7 +1,14 @@
+@import '../../app.scss';
+
 .category {
   display: flex;
   padding: 20px 80px;
   justify-content: space-between;
   gap: 5px;
   margin-block: 70px;
+
+  @include tablet{
+    padding: 10px 10px;  
+    flex-direction: column;          
+  }
 }

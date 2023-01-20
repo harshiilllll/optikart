@@ -2,23 +2,41 @@ import React, { useCallback, useEffect, useState } from "react";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import WestOutlinedIcon from "@mui/icons-material/WestOutlined";
 import "./slider.scss";
+import axios from "axios";
 
 const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [slider, setSlider] = useState([]);
 
-  const data = [
-    "https://cdn.discordapp.com/attachments/1064859758068248588/1064861021002547220/harshiilllll_cool_glasses_blue_white_background_product_photosh_558ed372-2f0c-4127-9dec-26070ff6861b.png",
-    "https://cdn.discordapp.com/attachments/1064859758068248588/1064863484187263046/harshiilllll_product_photoshoot_sunglasses_neat_clean_look_whit_ac1127a3-6f4d-40d1-a656-459a862aedc1.png",
-    "https://cdn.discordapp.com/attachments/1064859758068248588/1065242967339700224/harshiilllll_product_photoshoot_glasses_for_female_neat_clean_l_1c7662df-542d-40cb-aff9-d7a211bb9ef7.png",
-  ];
+  useEffect(() => {
+    const getSlider = async () => {
+      try {
+        const res = await axios.get("/slider", {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzZjZDc2MDA0ZjE5NzQ5NDFiNjJiNSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY3NDIzOTc0MiwiZXhwIjoxNjc0ODQ0NTQyfQ.ky9c50TwTn33bPSsNaYID4kVrrNrxbaFZ_QYEyDEmPQ",
+          },
+        });
+        console.log(res.data);
+        setSlider(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getSlider();
+  }, []);
 
   const prevSlide = useCallback(() => {
-    setCurrentSlide(currentSlide === 0 ? 2 : (prev) => prev - 1);
-  }, [currentSlide]);
+    setCurrentSlide(
+      currentSlide === 0 ? slider.length - 1 : (prev) => prev - 1
+    );
+  }, [currentSlide, slider.length]);
 
   const nextSlide = useCallback(() => {
-    setCurrentSlide(currentSlide === 2 ? 0 : (prev) => prev + 1);
-  }, [currentSlide]);
+    setCurrentSlide(
+      currentSlide === slider.length - 1 ? 0 : (prev) => prev + 1
+    );
+  }, [currentSlide, slider.length]);
 
   //To change next slide automatically
   useEffect(() => {
@@ -59,12 +77,12 @@ const Slider = () => {
         className="container"
         style={{
           transform: `translateX(-${currentSlide * 100}vw)`,
-          width: `${data.length * 100}vw`,
+          width: `${slider.length * 100}vw`,
         }}
       >
-        <img src={data[0]} alt="" />
-        <img src={data[1]} alt="" />
-        <img src={data[2]} alt="" />
+        {slider.map((slider) => (
+          <img src={slider.img} key={slider.img} alt="" />
+        ))}
       </div>
       <div className="icons">
         <div className="icon" onClick={prevSlide}>

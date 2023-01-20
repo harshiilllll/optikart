@@ -8,6 +8,7 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import LOGO from "../../img/LOGO.png";
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -23,8 +24,7 @@ const Navbar = () => {
     setScrollPosition(window.pageYOffset);
   };
 
-  const navbarClass = scrollPosition > 10 ? 'scrolled' : '';
-
+  const navbarClass = scrollPosition > 10 ? "scrolled" : "";
 
   return (
     <nav className={`navbar ${navbarClass}`}>
@@ -35,23 +35,26 @@ const Navbar = () => {
             <KeyboardArrowDown className="icon" />
           </div>
           <li className="item">
-            <Link className="link" to="/category/1" title="Men">
+            <Link className="link" to="/products/men" title="Men">
               Men
             </Link>
           </li>
           <li className="item">
-            <Link className="link" to="/category/2" title="Women">
+            <Link className="link" to="/products/women" title="Women">
               Women
             </Link>
           </li>
           <li className="item">
-            <Link className="link" to="/category/3" title="Kids">
+            <Link className="link" to="/products/kids" title="Kids">
               Kids
             </Link>
           </li>
         </ul>
         <div className="center">
-          <img className="logo-img" src="img/LOGO.png" alt="" />
+          <img className="logo-img" src={LOGO} alt="" />
+          <button className="hamburger">
+            <div className="bar"></div>
+          </button>
           <Link to="/" className="logo">
             OPTIKART
           </Link>
@@ -63,12 +66,12 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="item">
-            <Link className="link" to="/category/2" title="About">
+            <Link className="link" to="/products/2" title="About">
               About
             </Link>
           </li>
           <li className="item">
-            <Link className="link" to="/category/3" title="Contact">
+            <Link className="link" to="/products/3" title="Contact">
               Contact
             </Link>
           </li>
@@ -76,8 +79,10 @@ const Navbar = () => {
             <Search className="icon" />
             <FavoriteBorderOutlined className="icon" />
             <div className="cart-icon">
-              <ShoppingCartOutlined className="icon" />
-              <span>2</span>
+              <Link to="/cart" className="link">
+                <ShoppingCartOutlined className="icon" />
+                <span>2</span>
+              </Link>
             </div>
           </div>
         </ul>

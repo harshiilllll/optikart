@@ -1,17 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Urbanist:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Shrikhand&display=swap");
 
-/* makes sizing simpler */
+:root {
+}
 
+/* makes sizing simpler */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* remove default spacing */
-/* force styling of type through styling, rather than elements */
+html {
+  color-scheme: light;
+}
 
+/* force styling of type through styling, rather than elements */
 * {
   margin: 0;
   padding: 0;
@@ -53,8 +57,32 @@ code {
   font-family: "Urbanist", sans-serif;
   font-weight: 600;
 
-  &::after{
-    content: ".";
+  &::after {
+    content: "";
     font-weight: 900;
+  }
+}
+
+@mixin mini {
+  @media (max-width: 380px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (max-width: 1024px) {
+    @content;
   }
 }

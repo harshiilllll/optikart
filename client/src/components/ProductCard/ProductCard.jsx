@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ item }) => {
   return (
     <Link
-      to={`/product/${item.id}`}
+      to={`/product/${item._id}`}
       state={{ item: item }}
       className="productCard link"
     >
@@ -15,7 +15,7 @@ const ProductCard = ({ item }) => {
       </div>
       <div className="images">
         <img className="img" src={item.img[0]} alt="" />
-        <img className="img2" src={item.img[1]} alt="" />
+        {item.img[1] && <img className="img2" src={item.img[1]} alt="" />}
       </div>
       <div className="detail">
         <div className="title">{item.title}</div>
@@ -29,9 +29,7 @@ const ProductCard = ({ item }) => {
         <div className="bottom">
           <div className="color">{item.color}</div>
           <div className="size">{item.size}</div>
-
-          //have to fix this later
-          
+          -have to fix this later
         </div>
       </div>
     </Link>

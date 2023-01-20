@@ -1,3 +1,5 @@
+@import "../../app.scss";
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -6,10 +8,19 @@
   padding: 50px 80px;
   gap: 80px;
 
+  @include tablet {
+    padding: 40px 30px;
+  }
+
   .top {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+
+    @include tablet {
+      gap: 40px;
+    }
 
     .item {
       flex: 1;
@@ -26,6 +37,14 @@
 
       span {
         cursor: pointer;
+        width: fit-content;
+      }
+
+      .link {
+        display: flex;
+        align-items: center;
+        margin-block: 5px;
+        gap: 5px;
       }
     }
   }
@@ -36,12 +55,28 @@
     justify-content: space-between;
     width: 100%;
     border-top: 1px solid #777;
-    height: 70px;
+    flex-wrap: wrap;
+    padding-top: 20px;        
+
+    @include tablet{
+      gap: 40px;  
+      justify-content: center;        
+    }
 
     .left {
       display: flex;
       align-items: center;
       gap: 10px;
+
+      div{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        @include mobile{
+          flex-direction: column;      
+        }
+      }
     }
 
     img {

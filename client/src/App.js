@@ -1,5 +1,10 @@
 import "./app.scss";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import ProductList from "./pages/ProductList/ProductList";
 import Product from "./pages/Product/Product";
@@ -7,6 +12,11 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
+import Cart from "./pages/Cart/Cart";
+import Payment from "./pages/Payment";
+import Success from "./pages/Success";
+
+const user = true;
 
 const Layout = () => {
   return (
@@ -21,29 +31,41 @@ const Layout = () => {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: user ? <Layout /> : <Login />,
     children: [
       {
         path: "/",
         element: <Home />,
       },
       {
-        path: "/category/:id",
+        path: "/products/:category",
         element: <ProductList />,
       },
       {
         path: "/product/:id",
         element: <Product />,
       },
+      {
+        path: "/cart/",
+        element: <Cart />,
+      },
     ],
   },
   {
     path: "/login",
-    element: <Login />,
+    element: user ? <Navigate to="/" /> : <Login />,
   },
   {
     path: "/register",
-    element: <Register />,
+    element: user ? <Navigate to="/" /> : <Register />,
+  },
+  {
+    path: "/payment/",
+    element: <Payment />,
+  },
+  {
+    path: "/success/",
+    element: <Success />,
   },
 ]);
 

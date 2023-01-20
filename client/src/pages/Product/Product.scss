@@ -1,7 +1,14 @@
+@import '../../app.scss';
+
 .product {
   display: flex;
   justify-content: space-between;
   padding: 20px;
+
+  @include tablet {
+    padding: 10px;
+    flex-direction: column;
+  }
 
   .images {
     flex: 1;
@@ -13,7 +20,7 @@
 
     img {
       width: 40vw;
-      object-fit: cover;
+      object-fit: contain;
       transition: all 0.5s ease;
       &:hover {
         width: 42vw;
@@ -28,6 +35,10 @@
     flex-direction: column;
     gap: 20px;
     border-left: 1px solid lightgray;
+
+    @include tablet{
+      padding: 10px;         
+   }
 
     .productTitle {
       font-size: 32px;
@@ -60,6 +71,7 @@
     .options {
       display: flex;
       gap: 20px;
+      flex-wrap: wrap;
 
       .colors {
         display: flex;
@@ -82,42 +94,66 @@
       }
     }
 
-    .buttons{
+    .quantity {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      user-select: none;
+      gap: 10px;
+
+      .text{
+        padding: 3px 10px;
+        border: 1px solid #555;
+      }
+
+      .icon {
+        cursor: pointer;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 40px;
+
+      button {
+        border: none;
+        outline: none;
+        cursor: pointer;
+        display: flex;
+        min-width: 100px;
+        padding: 10px 20px;
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 10px;
-        margin-top: 40px;
+        font-weight: 600;
 
-        button {
-            border: none;
-            outline: none;
-            cursor: pointer;
-            display: flex;
-            min-width: 100px;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-weight: 600;
+        @include tablet{
+          font-size: 14px;   
+          justify-content: start;   
+          text-align: start;   
+       }
+      }
+
+      .buy-btn {
+        background-color: teal;
+        color: white;
+
+        &:hover {
+          background-color: rgb(0, 70, 70);
         }
+      }
 
-        .buy-btn {
-            background-color: teal;
-            color: white;
+      .cart-btn {
+        background-color: rgb(214, 240, 216);
 
-            &:hover {
-                background-color: rgb(0, 70, 70);
-            }
+        &:hover {
+          background-color: rgb(165, 203, 169);
         }
-
-        .cart-btn {
-            background-color: rgb(214, 240, 216);
-
-            &:hover {
-                background-color: rgb(165, 203, 169);
-            }
-        }
+      }
     }
   }
 }

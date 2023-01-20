@@ -1,20 +1,30 @@
+@import '../../app.scss';
+
 .productList {
   min-height: 90vh;
   padding: 20px 80px;
 
+  @include tablet{
+    padding: 10px 10px;         
+ }
+
   .heading {
     font-size: 32px;
     margin-bottom: 20px;
+    text-transform: capitalize;
   }
 
   .filterContainer {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
 
     .filter {
         display: flex;
         gap: 10px;
         align-items: center;
+        flex-wrap: wrap;
 
         .filterText {
             font-weight: 600;
