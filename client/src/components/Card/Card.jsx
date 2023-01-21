@@ -25,7 +25,7 @@ const Card = ({ item }) => {
   return (
     <Link
       to={`/product/${product._id}`}
-      state={{ item: item }}
+      state={{ item: product }}
       className="link"
     >
       <div className="card">
