@@ -21,6 +21,7 @@ const Products = ({ category, filters, sort }) => {
           }
         );
         setProducts(res.data);
+        setFilteredProducts(res.data);
       } catch (error) {
         console.log(error);
       }

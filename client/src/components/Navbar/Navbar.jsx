@@ -9,6 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LOGO from "../../img/LOGO.png";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -25,6 +26,10 @@ const Navbar = () => {
   };
 
   const navbarClass = scrollPosition > 10 ? "scrolled" : "";
+
+  //Redux
+  const quantity = useSelector((state) => state.cart.quantity);
+  console.log(quantity);
 
   return (
     <nav className={`navbar ${navbarClass}`}>
@@ -81,7 +86,7 @@ const Navbar = () => {
             <div className="cart-icon">
               <Link to="/cart" className="link">
                 <ShoppingCartOutlined className="icon" />
-                <span>2</span>
+                {quantity > 0 && <span>{quantity}</span>}
               </Link>
             </div>
           </div>

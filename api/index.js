@@ -9,6 +9,7 @@ const userRoute = require("./routes/users");
 const orderRoute = require("./routes/order");
 const cartRoute = require("./routes/cart");
 const sliderRoute = require("./routes/slider");
+const listsRoute = require("./routes/lists");
 const stripeRoute = require("./routes/stripe");
 
 const mongoose = require("mongoose");
@@ -31,6 +32,7 @@ app.use("/api/users", userRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/slider", sliderRoute);
+app.use("/api/lists", listsRoute);
 app.use("/api/checkout", stripeRoute);
 
 app.listen(PORT, () => {

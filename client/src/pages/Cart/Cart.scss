@@ -164,12 +164,15 @@
         padding: 20px;
         flex: 1;
         border: 0.5px solid lightgray;
-        border-radius: 10px;
+        border-radius: 0;
         height: 50vh;
         gap: 10px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
+        position: sticky;
+        top: 90px;
 
         @include tablet {
           padding: 10px;

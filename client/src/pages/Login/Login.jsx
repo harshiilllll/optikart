@@ -1,12 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { login } from "../../redux/apiCalls";
 import "./Login.scss";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  console.log(username);
+  console.log(email);
   console.log(password);
+
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    login(dispatch, { email, password });
+  };
 
   return (
     <div className="login">
@@ -15,11 +25,11 @@ const Login = () => {
         <div className="inputs">
           <input
             className="input"
-            type="text"
-            placeholder="Email or Username"
+            type="email"
+            placeholder="Email"
             autoComplete="off"
             onChange={(e) => {
-              setUsername(e.target.value);
+              setEmail(e.target.value);
             }}
           />
           <input
@@ -32,7 +42,14 @@ const Login = () => {
             }}
           />
         </div>
-        <input className="button" type="submit" value="Login" />
+        <input
+          className="button"
+          type="submit"
+          value="Login"
+          onClick={handleLogin}
+          disabled={isFetching}
+        />
+        {error && <span style={{ color: "red" }}>Something went wrong</span>}
         <div>
           Not registered?
           <Link className="link" to="/register">
