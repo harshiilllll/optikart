@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Register.scss";
 
 const Register = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  console.log(username);
-  console.log(password);
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
+  // console.log(username);
+  // console.log(password);
 
   return (
     <div className="register">

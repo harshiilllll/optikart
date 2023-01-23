@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Card = ({ item }) => {
-  console.log(item);
-
   const [product, setProduct] = useState({});
 
   useEffect(() => {
@@ -13,25 +11,34 @@ const Card = ({ item }) => {
       const res = await axios.get("/products/find/" + item, {
         headers: {
           token:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzZjZDc2MDA0ZjE5NzQ5NDFiNjJiNSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY3NDIzOTc0MiwiZXhwIjoxNjc0ODQ0NTQyfQ.ky9c50TwTn33bPSsNaYID4kVrrNrxbaFZ_QYEyDEmPQ",
+            "Bearer " +
+            JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
+              .accessToken,
         },
       });
       setProduct(res.data);
     };
     getProduct();
-  }, []);
+  }, [item]);
+
 
   // console.log(product?.img[0]);
   return (
     <Link
       to={`/product/${product._id}`}
-      state={{ item: item }}
+      state={{ item: product }}
       className="link"
     >
       <div className="card">
         <div className="images">
           {product?.img?.map((img) => (
-            <img src={img} className="img" title={product.title} />
+            <img
+              key={img}
+              src={img}
+              className="img"
+              title={product.title}
+              alt=""
+            />
           ))}
         </div>
         {/* <div className="detail">

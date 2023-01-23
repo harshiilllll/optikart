@@ -15,65 +15,66 @@ import Login from "./pages/Login/Login";
 import Cart from "./pages/Cart/Cart";
 import Payment from "./pages/Payment";
 import Success from "./pages/Success";
-
-const user = true;
-
-const Layout = () => {
-  return (
-    <div className="App">
-      <Navbar />
-      <Outlet />
-      <Footer />
-    </div>
-  );
-};
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: user ? <Layout /> : <Login />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/products/:category",
-        element: <ProductList />,
-      },
-      {
-        path: "/products/",
-        element: <ProductList />,
-      },
-      {
-        path: "/product/:id",
-        element: <Product />,
-      },
-      {
-        path: "/cart/",
-        element: <Cart />,
-      },
-    ],
-  },
-  {
-    path: "/login",
-    element: user ? <Navigate to="/" /> : <Login />,
-  },
-  {
-    path: "/register",
-    element: user ? <Navigate to="/" /> : <Register />,
-  },
-  {
-    path: "/payment/",
-    element: <Payment />,
-  },
-  {
-    path: "/success/",
-    element: <Success />,
-  },
-]);
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const user = useSelector((state) => state.user.user);
+
+  const Layout = () => {
+    return (
+      <div className="App">
+        <Navbar />
+        <Outlet />
+        <Footer />
+      </div>
+    );
+  };
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: user ? <Layout /> : <Login />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/products/:category",
+          element: <ProductList />,
+        },
+        {
+          path: "/products/",
+          element: <ProductList />,
+        },
+        {
+          path: "/product/:id",
+          element: <Product />,
+        },
+        {
+          path: "/cart/",
+          element: <Cart />,
+        },
+      ],
+    },
+    {
+      path: "/login",
+      element: user ? <Navigate to="/" /> : <Login />,
+    },
+    {
+      path: "/register",
+      element: user ? <Navigate to="/" /> : <Register />,
+    },
+    {
+      path: "/payment/",
+      element: <Payment />,
+    },
+    {
+      path: "/success/",
+      element: <Success />,
+    },
+  ]);
+
   return (
     <>
       <RouterProvider router={router} />

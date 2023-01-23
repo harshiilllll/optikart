@@ -1,6 +1,5 @@
 import ProductCard from "../ProductCard/ProductCard";
 import "./Products.scss";
-import { demoData } from "../../demoData";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -16,7 +15,9 @@ const Products = ({ category, filters, sort }) => {
           {
             headers: {
               token:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzZjZDc2MDA0ZjE5NzQ5NDFiNjJiNSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY3NDIzOTc0MiwiZXhwIjoxNjc0ODQ0NTQyfQ.ky9c50TwTn33bPSsNaYID4kVrrNrxbaFZ_QYEyDEmPQ",
+              "Bearer " +
+              JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
+                .accessToken,
             },
           }
         );

@@ -29,7 +29,7 @@ const Navbar = () => {
 
   //Redux
   const quantity = useSelector((state) => state.cart.quantity);
-  console.log(quantity);
+  // console.log(quantity);
 
   return (
     <nav className={`navbar ${navbarClass}`}>

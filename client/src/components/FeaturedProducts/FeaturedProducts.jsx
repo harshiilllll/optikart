@@ -10,7 +10,7 @@ const FeaturedProducts = ({ list }) => {
       </div>
       <div className="bottom">
         {list.content.map((item) => (
-          <Card item={item} key={item._id} />
+          <Card item={item} key={item} />
         ))}
       </div>
     </div>

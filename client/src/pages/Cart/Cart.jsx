@@ -21,8 +21,8 @@ const Cart = () => {
             <button className="shopping-btn">CONTINUE SHOPPING</button>
           </Link>
           <div className="texts">
-            <div className="text">Shopping Bag({cart.products.length})</div>
-            <div className="text">Your Wishlist(4)</div>
+            <div className="text">My Bag({cart.products.length})</div>
+            <div className="text">Wishlist(4)</div>
           </div>
           <button className="checkout-btn">CHECKOUT NOW</button>
         </div>
