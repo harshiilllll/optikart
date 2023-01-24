@@ -176,6 +176,7 @@ const ProductForm = () => {
           placeholder="Seperate categories by comma ,"
           name="categories"
           sx={{ gridColumn: "span 4" }}
+          inputProps={{ style: { textTransform: "lowercase" } }}
           required
           onChange={handleCat}
         />
@@ -187,6 +188,7 @@ const ProductForm = () => {
           placeholder="Seperate colors by comma ,"
           name="color"
           sx={{ gridColumn: "span 4" }}
+          inputProps={{ style: { textTransform: "lowercase" } }}
           required
           onChange={handleColor}
         />
