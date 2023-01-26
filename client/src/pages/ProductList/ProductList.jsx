@@ -36,7 +36,7 @@ const ProductList = () => {
               defaultValue="Select a color"
               name="color"
             >
-              <option value="" disabled>
+              <option value="">
                 Select a color
               </option>
               <option value="Gold">Gold</option>
@@ -54,7 +54,7 @@ const ProductList = () => {
               defaultValue="Select size"
               name="size"
             >
-              <option value="" disabled>
+              <option value="">
                 Select frame size
               </option>
               <option value="Small">Small</option>

@@ -5,48 +5,19 @@ import { Link } from "react-router-dom";
 
 const ProductCard = ({ item }) => {
   return (
-    // <Link
-    //   to={`/product/${item._id}`}
-    //   state={{ item: item }}
-    //   className="productCard link"
-    // >
-    //   <div className="icons">
-    //     <FavoriteBorderIcon />
-    //   </div>
-    //   <div className="images">
-    //     <img className="img" src={item.img[0]} alt="" />
-    //     {item.img[1] && <img className="img2" src={item.img[1]} alt="" />}
-    //   </div>
-    //   <div className="detail">
-    //     <div className="title">{item.title}</div>
-    //     <div className="price">
-    //       <p>Rs. {item.oldPrice}</p>
-    //       <p>Rs .{item.price}</p>
-    //     </div>
-    //     <div className="bottom">
-    //       <div className="colors">
-    //         {item.color.map((c) => (
-    //           <div className="color" style={{ backgroundColor: c }}></div>
-    //         ))}
-    //       </div>
-    //       <div className="size">{item.size}</div>
-    //     </div>
-    //     <button>
-    //       <ShoppingCartOutlinedIcon /> Add to cart
-    //     </button>
-    //   </div>
-    // </Link>
-    <div class="product-card">
-      <div class="badge">{item.isNew && "New"}</div>
-      <div class="product-tumb">
+    <div className="product-card">
+      <div className="badge">{item.isNew && "New"}</div>
+      <div className="product-tumb">
         <Link to={`/product/${item._id}`} state={{ item: item }}>
           <img className="img1" src={item.img[0]} alt="" />
           {item.img[1] && <img className="img2" src={item.img[1]} alt="" />}
         </Link>
       </div>
-      <div class="product-details">
+      <div className="product-details">
         {item.categories.map((c) => (
-          <span class="product-catagory">{c}</span>
+          <span key={c} className="product-catagory">
+            {c}
+          </span>
         ))}
         <h4>
           <Link to={`/product/${item._id}`} state={{ item: item }}>
@@ -54,17 +25,33 @@ const ProductCard = ({ item }) => {
           </Link>
         </h4>
         <p className="desc">{item.desc}</p>
-        <div class="product-bottom-details">
-          <div class="product-price">
+        <div className="product-bottom-details">
+          <div className="product-price">
             <small>Rs. {item.oldPrice}</small>Rs. {item.price}
           </div>
-          <div class="product-links">
+          <div className="product-links">
             <Link to="">
               <FavoriteBorderIcon />
             </Link>
             <Link to="">
               <ShoppingCartOutlinedIcon />
             </Link>
+          </div>
+          <div className="colors">
+            {item.color.map((c) => (
+              <div
+                key={c}
+                className="color"
+                style={{
+                  marginInlineEnd: "3px",
+                  backgroundColor: c,
+                  height: "12px",
+                  width: "12px",
+                  borderRadius: "50%",
+                  border: "1px solid black",
+                }}
+              ></div>
+            ))}
           </div>
         </div>
       </div>

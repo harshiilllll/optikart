@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCNH-QuAHOVYAVANWkEkhxQpznWN5VrIjo",
+  apiKey: process.env.FIREBASE_API,
   authDomain: "optikart-92c45.firebaseapp.com",
   projectId: "optikart-92c45",
   storageBucket: "optikart-92c45.appspot.com",

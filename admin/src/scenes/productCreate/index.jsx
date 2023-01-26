@@ -8,7 +8,6 @@ import {
   MenuItem,
   Select,
   TextField,
-  Typography,
 } from "@mui/material";
 import { useState } from "react";
 import Header from "../../components/Header";
@@ -225,14 +224,19 @@ const ProductForm = () => {
         >
           UPLOAD
         </Button>
-        <FormControl fullWidth>
+        {/* <FormControl fullWidth>
           <InputLabel>In Stock</InputLabel>
           <Select defaultValue="true" name="inStock" onChange={handleChange}>
             <MenuItem value="true">Yes</MenuItem>
             <MenuItem value="false">No</MenuItem>
           </Select>
-        </FormControl>
-        <Box display="flex" justifyContent="start" mt="0px">
+        </FormControl> */}
+        <Box
+          display="flex"
+          justifyContent="start"
+          mt="0px"
+          sx={{ gridColumn: "span 4" }}
+        >
           <Button type="submit" color="secondary" variant="contained">
             ADd New Product
           </Button>

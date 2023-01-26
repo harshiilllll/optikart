@@ -17,7 +17,7 @@ const Products = ({ category, filters, sort }) => {
               token:
               "Bearer " +
               JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
-                .accessToken,
+              .user.accessToken,
             },
           }
         );
@@ -32,13 +32,14 @@ const Products = ({ category, filters, sort }) => {
 
   useEffect(() => {
     category &&
-      setFilteredProducts(
-        products.filter((item) =>
-          Object.entries(filters).every(([key, value]) =>
-            item[key].includes(value)
-          )
+    setFilteredProducts(
+      products.filter((item) =>
+        Object.entries(filters).every(([key, value]) =>
+          item[key].includes(value) || item.size === value || item.color === value
         )
-      );
+      )
+  );
+  
   }, [products, category, filters]);
 
   useEffect(() => {

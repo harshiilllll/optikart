@@ -4,7 +4,7 @@ import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import Invoices from "./scenes/invoices";
-import Contacts from "./scenes/contacts";
+import Users from "./scenes/users";
 import Bar from "./scenes/bar";
 import Form from "./scenes/form";
 import Line from "./scenes/line";
@@ -19,6 +19,9 @@ import { useSelector } from "react-redux";
 import Products from "./scenes/products";
 import Product from "./scenes/product";
 import ProductForm from "./scenes/productCreate";
+import Lists from "./scenes/lists";
+import List from "./scenes/list";
+import CreateList from "./scenes/listCreate";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -30,7 +33,7 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        {user ? (
+        {user && user.isAdmin ? (
           <div className="app">
             <Sidebar isSidebar={isSidebar} />
             <main className="content">
@@ -39,8 +42,11 @@ function App() {
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/product/:id" element={<Product />} />
-                <Route path="/contacts" element={<Contacts />} />
+                <Route path="/users" element={<Users />} />
                 <Route path="/invoices" element={<Invoices />} />
+                <Route path="/lists" element={<Lists />} />
+                <Route path="/create-list" element={<CreateList />} />
+                <Route path="/list/:id" element={<List />} />
                 <Route path="/form" element={<Form />} />
                 <Route path="/add-product" element={<ProductForm />} />
                 <Route path="/bar" element={<Bar />} />

@@ -1,3 +1,5 @@
+@import "../../app.scss";
+
 .slider {
   height: calc(85vh - 60px);
   width: 100%;
@@ -14,6 +16,10 @@
       height: 100%;
       object-fit: contain;
       object-position: top;
+
+      @include tablet {
+        object-fit: cover;
+      }
     }
   }
 
@@ -27,6 +33,10 @@
     gap: 10px;
     margin: auto;
 
+    @include tablet {
+      bottom: 20px;
+    }
+
     .icon {
       width: 50px;
       height: 30px;
@@ -38,6 +48,11 @@
       color: #333;
       background-color: rgba(255 255 255 / 80%);
       backdrop-filter: blur(8px);
+
+      &:hover {
+        background-color: #333;
+        color: white;
+      }
     }
   }
 }

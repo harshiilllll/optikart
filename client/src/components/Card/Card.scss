@@ -1,4 +1,4 @@
-@import '../../app.scss';
+@import "../../app.scss";
 
 .card {
   display: flex;
@@ -42,6 +42,9 @@
         z-index: 2;
         object-fit: cover;
       }
+      // .img {
+      //   display: none;
+      // }
     }
 
     img {

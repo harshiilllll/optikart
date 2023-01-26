@@ -39,6 +39,29 @@
 
       .icons {
         color: #414141;
+        position: relative;
+
+        .options {
+          display: none;
+          position: absolute;
+          top: 20px;
+          left: 0px;
+          color: #414141;
+          background-color: white;
+          padding: 5px;
+          border-radius: 4px;
+          cursor: pointer;
+
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+
+        &:hover {
+          .options {
+            display: block;
+          }
+        }
 
         .icon {
           font-size: 20px;

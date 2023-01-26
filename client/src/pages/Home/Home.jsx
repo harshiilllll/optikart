@@ -8,6 +8,7 @@ import Newsletter from "../../components/Newsletter/Newsletter";
 import Slider from "../../components/Slider/Slider";
 
 const Home = () => {
+  
   const [lists, setLists] = useState([]);
   useEffect(() => {
     const getLists = async () => {
@@ -16,7 +17,7 @@ const Home = () => {
           token:
             "Bearer " +
             JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
-              .accessToken,
+              .user.accessToken,
         },
       });
       setLists(res.data);

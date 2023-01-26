@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const List = require("../schemas/List");
-const { verify } = require("../verifyToken");
+const { verify, verifyTokenAndAdmin } = require("../verifyToken");
 
 //CREATE LIST
-router.post("/", verify, async (req, res) => {
+router.post("/", verifyTokenAndAdmin, async (req, res) => {
   const list = new List(req.body);
   try {
     const savedList = await list.save();
@@ -20,6 +20,22 @@ router.get("/", verify, async (req, res) => {
     res.status(200).json(lists);
   } catch (error) {
     res.status(500).json(error);
+  }
+});
+
+//UPDATE LIST
+router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const updatedList = await List.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedList);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 

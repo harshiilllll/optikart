@@ -9,7 +9,8 @@ import {
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LOGO from "../../img/LOGO.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/userRedux";
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -31,6 +32,8 @@ const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity);
   // console.log(quantity);
 
+  const dispatch = useDispatch();
+
   return (
     <nav className={`navbar ${navbarClass}`}>
       <div className="wrapper">
@@ -38,6 +41,9 @@ const Navbar = () => {
           <div className="icons">
             <PersonOutlined className="icon" />
             <KeyboardArrowDown className="icon" />
+            <div className="options" onClick={() => dispatch(logout())}>
+              LOGOUT
+            </div>
           </div>
           <li className="item">
             <Link className="link" to="/products/men" title="Men">

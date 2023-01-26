@@ -48,10 +48,9 @@ const Dashboard = () => {
         },
       });
       setOrders(res.data);
-      console.log(orders);
     };
     getOrders();
-  });
+  }, []);
 
   return (
     <Box m="20px">

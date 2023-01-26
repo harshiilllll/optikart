@@ -1,90 +1,59 @@
-import { Avatar, Box, Button, useTheme } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { Box, Button, Typography, useTheme } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
-import { useEffect } from "react";
-import { deleteProduct, getProducts } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getLists } from "../../redux/apiCalls";
+import { format } from "timeago.js";
 import { Link } from "react-router-dom";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 
-const Products = () => {
+const Lists = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  
 
-  //Fetch products
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getProducts(dispatch);
+    getLists(dispatch);
   }, [dispatch]);
-  const products = useSelector((state) => state.products.products);
 
-  //Delete product
-  const handleDelete = (id) => {
-    if (window.confirm("Are your sure you want to delete?")) {
-      deleteProduct(id, dispatch);
-    } else {
-      return;
-    }
+  const lists = useSelector((state) => state.lists.lists);
+
+  //Delete
+  const handleDelete = (e) => {
+    //
   };
 
   const columns = [
     { field: "_id", headerName: "ID", width: 180 },
     {
-      field: "img",
-      headerName: "Img",
-      width: 30,
-      renderCell: (params) => {
-        return (
-          <>
-            <Avatar
-              sx={{
-                bgcolor: colors.greenAccent[300],
-                objectFit: "contain",
-                height: 28,
-                marginRight: 1,
-              }}
-              alt={params.row.title}
-              src={params.row.img[0]}
-              variant="rounded"
-            />
-          </>
-        );
-      },
-    },
-    {
       field: "title",
-      headerName: "Name",
-      flex: 1,
+      headerName: "Title",
+      width: 180,
       cellClassName: "name-column--cell",
-      renderCell: (params) => {
-        return <div title={params.row.title}>{params.row.title}</div>;
-      },
     },
     {
-      field: "price",
-      headerName: "Price",
-      type: "number",
-      headerAlign: "left",
-      align: "left",
-    },
-    {
-      field: "inStock",
-      headerName: "In Stock",
+      field: "desc",
+      headerName: "Description",
       flex: 1,
-      renderCell: (params) =>
-        params.row.inStock ? (
-          <DoneRoundedIcon sx={{ color: colors.greenAccent[300] }} />
-        ) : (
-          <CloseRoundedIcon sx={{ color: colors.redAccent[500] }} />
-        ),
     },
     {
-      field: "email",
-      headerName: "Email",
+      field: "content",
+      headerName: "Products",
+      width: 80,
+      renderCell: (params) => <span>{params.row.content.length}</span>,
+    },
+    {
+      field: "createdAt",
+      headerName: "Created At",
       flex: 1,
+      renderCell: (params) => (
+        <Typography color={colors.greenAccent[500]}>
+          {format(params.row.createdAt)}
+        </Typography>
+      ),
     },
     {
       field: "actions",
@@ -102,7 +71,7 @@ const Products = () => {
         return (
           <Box display="flex" gap="10px">
             <Link
-              to={`/product/${params.row._id}`}
+              to={`/list/${params.row._id}`}
               style={{ textDecoration: "none" }}
             >
               <Button
@@ -129,7 +98,7 @@ const Products = () => {
 
   return (
     <Box m="20px">
-      <Header title="PRODUCTS" subtitle="Managing the products" />
+      <Header title="Lists" subtitle="List of Invoice Balances" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -157,28 +126,17 @@ const Products = () => {
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
           },
-          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-            color: `${colors.grey[100]} !important`,
-          },
         }}
       >
         <DataGrid
           checkboxSelection
-          rows={products}
+          rows={lists}
           getRowId={(row) => row._id}
           columns={columns}
-          components={{ Toolbar: GridToolbar }}
-          onSelectionModelChange={(ids) => {
-            const selectedIDs = new Set(ids);
-            const selectedRowData = products.filter((product) =>
-              selectedIDs.has(product._id.toString())
-            );
-            console.log(selectedRowData);
-          }}
         />
       </Box>
     </Box>
   );
 };
 
-export default Products;
+export default Lists;

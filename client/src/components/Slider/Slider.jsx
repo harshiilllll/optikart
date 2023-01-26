@@ -16,7 +16,7 @@ const Slider = () => {
             token:
             "Bearer " +
             JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
-              .accessToken,
+              .user.accessToken,
           },
         });
         setSlider(res.data);

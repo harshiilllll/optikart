@@ -13,7 +13,7 @@ const Card = ({ item }) => {
           token:
             "Bearer " +
             JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
-              .accessToken,
+              .user.accessToken,
         },
       });
       setProduct(res.data);
@@ -21,11 +21,10 @@ const Card = ({ item }) => {
     getProduct();
   }, [item]);
 
-
   // console.log(product?.img[0]);
   return (
     <Link
-      to={`/product/${product._id}`}
+      to={`/product/${product?._id}`}
       state={{ item: product }}
       className="link"
     >
