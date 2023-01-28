@@ -30,20 +30,17 @@ const Card = ({ item }) => {
     >
       <div className="card">
         <div className="images">
-          {product?.img?.map((img) => (
-            <img
-              key={img}
-              src={img}
-              className="img"
-              title={product.title}
-              alt=""
-            />
-          ))}
+          <img src={product.img} className="img" title={product.title} alt="" />
+          <img
+            src={product.img}
+            className="img"
+            title={product.title}
+            alt=""
+          />
         </div>
         {/* <div className="detail">
           <div className="title">{product.title}</div>
           <div className="price">
-            <p>Rs. {product.oldPrice}</p>
             <p>Rs. {product.price}</p>
           </div>
           <span className="new">{product.isNew && <p>New</p>}</span>

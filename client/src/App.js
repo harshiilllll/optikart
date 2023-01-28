@@ -15,7 +15,12 @@ import Login from "./pages/Login/Login";
 import Cart from "./pages/Cart/Cart";
 import Payment from "./pages/Payment";
 import Success from "./pages/Success";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Notice from "./components/Notice/Notice";
+import ContactUs from "./pages/ContactUs/ContactUs";
+import About from "./pages/About/About";
+import { useEffect } from "react";
+import { getSettings } from "./redux/apiCalls";
 
 const App = () => {
   const user = useSelector((state) => state.user.user);
@@ -23,6 +28,7 @@ const App = () => {
   const Layout = () => {
     return (
       <div className="App">
+        <Notice />
         <Navbar />
         <Outlet />
         <Footer />
@@ -55,6 +61,14 @@ const App = () => {
           path: "/cart/",
           element: <Cart />,
         },
+        {
+          path: "/about",
+          element: <About />,
+        },
+        {
+          path: "/contact/",
+          element: <ContactUs />,
+        },
       ],
     },
     {
@@ -75,8 +89,15 @@ const App = () => {
     },
   ]);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getSettings(dispatch);
+  }, []);
+
   return (
     <>
+      <title>OPTIKART</title>
       <RouterProvider router={router} />
     </>
   );

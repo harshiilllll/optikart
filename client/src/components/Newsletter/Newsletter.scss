@@ -9,6 +9,7 @@
     justify-content: center;
     gap: 20px;
     padding: 10px;
+    color: var(--accent-font);
 
     @include tablet{
        height: 40vh;         
@@ -16,6 +17,7 @@
 
     .title {
         font-size: 56px;
+        font-weight: 700;
 
         @include tablet{
           font-size: 32px;      
@@ -25,6 +27,7 @@
     .desc{
         font-size: 20px;
         text-align: center;
+        letter-spacing: 1px;
 
         @include tablet{
            font-size: 16px;     
@@ -60,7 +63,7 @@
             width: 70px;
             border: none;
             outline: none;
-            background-color: teal;
+            background-color: var(--accent-color);
             color: white;
             height: 100%;
             display: grid;

@@ -10,6 +10,7 @@ import { addProduct } from "../../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FavoriteBorderRounded } from "@mui/icons-material";
 
 const Product = () => {
   const item = useLocation().state.item;
@@ -93,13 +94,12 @@ const Product = () => {
             <AddIcon onClick={handleQuantityAdd} className="icon" />
           </div>
           <div className="buttons">
-            <button className="buy-btn">
-              <LocalMallRoundedIcon />
-              Buy Now
-            </button>
             <button className="cart-btn" onClick={handleClick}>
               <ShoppingCartOutlinedIcon />
               Add to cart
+            </button>
+            <button className="wish-btn">
+              <FavoriteBorderRounded />
             </button>
           </div>
         </div>

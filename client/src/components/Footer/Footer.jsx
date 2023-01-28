@@ -2,8 +2,10 @@ import { EmailRounded, PhoneIphoneRounded } from "@mui/icons-material";
 import React from "react";
 import "./footer.scss";
 import paymentImg from "../../img/payment.png";
+import { useSelector } from "react-redux";
 
 const Footer = () => {
+  const brand = useSelector((state) => state.settings);
   return (
     <div className="footer">
       <div className="top">
@@ -29,21 +31,21 @@ const Footer = () => {
         </div>
         <div className="item">
           <h1>Contact</h1>
-          <p>1 10th Street, Brownwood,tx, 36801 United States</p>
+          <p>{brand.address}</p>
           <a className="link" href="mailto:">
             <EmailRounded />
-            optikart@gmail.com
+            {brand.brandEmail}
           </a>
           <a className="link" href="tel:">
             <PhoneIphoneRounded />
-            (+91) 987654321
+            {brand.brandNumber}
           </a>
         </div>
       </div>
       <div className="bottom">
         <div className="left">
           <div>
-            <div className="logo">OPTIKART</div>
+            <div className="logo">{brand.brandName}</div>
             <div className="copyright">
               &copy; Copyright 2023 - All rights reserved.
             </div>

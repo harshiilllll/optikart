@@ -2,8 +2,9 @@ import ProductCard from "../ProductCard/ProductCard";
 import "./Products.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-const Products = ({ category, filters, sort }) => {
+const Products = ({ category, filters, sort, clearFilters }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -15,14 +16,14 @@ const Products = ({ category, filters, sort }) => {
           {
             headers: {
               token:
-              "Bearer " +
-              JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
-              .user.accessToken,
+                "Bearer " +
+                JSON.parse(
+                  JSON.parse(localStorage.getItem("persist:root")).user
+                ).user.accessToken,
             },
           }
         );
         setProducts(res.data);
-        setFilteredProducts(res.data);
       } catch (error) {
         console.log(error);
       }
@@ -31,21 +32,22 @@ const Products = ({ category, filters, sort }) => {
   }, [category]);
 
   useEffect(() => {
-    category &&
     setFilteredProducts(
       products.filter((item) =>
-        Object.entries(filters).every(([key, value]) =>
-          item[key].includes(value) || item.size === value || item.color === value
+        Object.entries(filters).every(
+          ([key, value]) =>
+            item[key].includes(value) ||
+            item.size === value ||
+            item.color === value
         )
       )
-  );
-  
-  }, [products, category, filters]);
+    );
+  }, [products, filters]);
 
   useEffect(() => {
     if (sort === "newest") {
       setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => a.createdAt - b.createdAt)
+        [...prev].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
       );
     } else if (sort === "asc") {
       setFilteredProducts((prev) =>
@@ -58,10 +60,20 @@ const Products = ({ category, filters, sort }) => {
     }
   }, [sort]);
 
+  useEffect(() => {
+    clearFilters();
+  }, [category]);
+
   return (
     <div className="products">
+      {filteredProducts.length === 0 && (
+        <>
+          <h1>No results.</h1>
+          <Link to={`/products`}>Browse All Products</Link>
+        </>
+      )}
       {filteredProducts.map((item) => (
-        <ProductCard item={item} key={item._id} />
+        <ProductCard forHome={false} item={item} key={item._id} />
       ))}
     </div>
   );

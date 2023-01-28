@@ -12,13 +12,19 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import settingsReducer from "./settingsRedux";
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
+  blacklist: ["settings"],
 };
-const rootReducer = combineReducers({ user: userReducer, cart: cartReducer });
+const rootReducer = combineReducers({
+  user: userReducer,
+  cart: cartReducer,
+  settings: settingsReducer,
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

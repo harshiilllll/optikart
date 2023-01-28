@@ -59,7 +59,7 @@ router.get("/", verify, async (req, res) => {
       products = await Product.find().sort({ _id: -1 }).limit(2);
     } else if (queryCategory) {
       products = await Product.find({
-        categories: { $regex: queryCategory, $options: "i" },
+        categories: { $eq: queryCategory },
       });
     } else {
       products = await Product.find();

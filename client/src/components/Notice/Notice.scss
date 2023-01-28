@@ -1,0 +1,13 @@
+.notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: var(--accent-color);
+  color: white;
+  letter-spacing: 2px;
+  border-bottom: 1px solid black;
+  font-size: 14px;
+  text-align: center;
+  padding: 5px;
+}

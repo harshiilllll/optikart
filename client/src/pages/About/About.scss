@@ -1,0 +1,19 @@
+.about {
+  min-height: 70vh;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+
+  h1 {
+    font-size: 28px;
+    color: var(--accent-font);
+    margin-bottom: 70px;
+  }
+
+  p {
+    text-align: center;
+    margin-block: 10px;
+  }
+}

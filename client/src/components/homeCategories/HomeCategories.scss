@@ -1,0 +1,33 @@
+@import "../../app.scss";
+
+.homeCategories {
+  padding: 20px 80px;
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+
+  @include tablet {
+    padding: 10px;
+  }
+
+  .cat {
+    padding: 18px 32px;
+    color: white;
+    filter: drop-shadow(0px 2px 4px 1px rgba($color: #000000, $alpha: 0.5));
+    font-size: 14px;
+    text-transform: uppercase;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    transition: 0.2s ease-out;
+
+    &:empty {
+      display: none;
+    }
+
+    &:hover,
+    &:focus {
+      box-shadow: 0px 2px 4px 1px rgba($color: #000000, $alpha: 0.5);
+    }
+  }
+}

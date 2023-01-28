@@ -6,7 +6,6 @@
   gap: 20px;
   width: 30vw;
   height: 200px;
-  padding: 10px;
   position: relative;
   border-radius: 8px;
   // box-shadow: 0 0 2px 1px rgba(0 0 0 / 20%);
@@ -75,11 +74,6 @@
       p {
         font-weight: 600;
         font-size: 16px;
-
-        &:first-child {
-          text-decoration: line-through;
-          color: gray;
-        }
       }
     }
   }

@@ -12,6 +12,7 @@
     font-size: 32px;
     margin-bottom: 20px;
     text-transform: capitalize;
+    letter-spacing: 1px;
   }
 
   .filterContainer {
@@ -27,8 +28,11 @@
         flex-wrap: wrap;
 
         .filterText {
-            font-weight: 600;
+            font-weight: 500;
             font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         select{

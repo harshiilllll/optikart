@@ -2,8 +2,9 @@ import { Add, Remove } from "@mui/icons-material";
 import React, { useEffect } from "react";
 import Anouncement from "../../components/Anouncement/Anouncement";
 import "./Cart.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { removeProduct } from "../../redux/cartRedux";
 
 const Cart = () => {
   useEffect(() => {
@@ -11,6 +12,12 @@ const Cart = () => {
   }, []);
 
   const cart = useSelector((state) => state.cart);
+
+  const dispatch = useDispatch();
+
+  const handleRemoveFromCart = (id, price, quantity) => {
+    dispatch(removeProduct({ id, price, quantity }));
+  };
 
   return (
     <div className="cart">
@@ -28,6 +35,9 @@ const Cart = () => {
         </div>
         <div className="bottom">
           <div className="info">
+            {cart.products.length === 0 && (
+              <span>No products in your cart. Continue Shopping!</span>
+            )}
             {cart.products.map((item) => (
               <div key={item._id}>
                 <div className="product">
@@ -61,32 +71,46 @@ const Cart = () => {
                     <div className="product-price">
                       Rs. {item.price * item.quantity}
                     </div>
+                    <button
+                      className="remove-btn"
+                      onClick={() =>
+                        handleRemoveFromCart(
+                          item._id,
+                          item.price,
+                          item.quantity
+                        )
+                      }
+                    >
+                      REMOVE
+                    </button>
                   </div>
                 </div>
                 <hr className="line" />
               </div>
             ))}
           </div>
-          <div className="summary">
-            <h1 className="summary-title">Order Summary</h1>
-            <div className="summary-item">
-              <span className="summary-item-text">Subtotal</span>
-              <span className="summary-item-text">Rs. {cart.totalPrice}</span>
+          {cart.products.length > 0 && (
+            <div className="summary">
+              <h1 className="summary-title">Order Summary</h1>
+              <div className="summary-item">
+                <span className="summary-item-text">Subtotal</span>
+                <span className="summary-item-text">Rs. {cart.totalPrice}</span>
+              </div>
+              <div className="summary-item">
+                <span className="summary-item-text">Estimated Shipping</span>
+                <span className="summary-item-text">Rs. 50</span>
+              </div>
+              <div className="summary-item">
+                <span className="summary-item-text">Shipping Discount</span>
+                <span className="summary-item-text">Rs. -50</span>
+              </div>
+              <div className="summary-item total">
+                <span className="summary-item-text">Total</span>
+                <span className="summary-item-text">Rs. {cart.totalPrice}</span>
+              </div>
+              <button className="checkout-btn">CHECKOUT NOW</button>
             </div>
-            <div className="summary-item">
-              <span className="summary-item-text">Estimated Shipping</span>
-              <span className="summary-item-text">Rs. 50</span>
-            </div>
-            <div className="summary-item">
-              <span className="summary-item-text">Shipping Discount</span>
-              <span className="summary-item-text">Rs. -50</span>
-            </div>
-            <div className="summary-item total">
-              <span className="summary-item-text">Total</span>
-              <span className="summary-item-text">Rs. {cart.totalPrice}</span>
-            </div>
-            <button className="checkout-btn">CHECKOUT NOW</button>
-          </div>
+          )}
         </div>
       </div>
       <Anouncement />

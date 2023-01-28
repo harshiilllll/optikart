@@ -52,7 +52,7 @@
           border-radius: 4px;
           cursor: pointer;
 
-          &:hover{
+          &:hover {
             text-decoration: underline;
           }
         }
@@ -111,14 +111,14 @@
 
           span {
             position: absolute;
-            top: -3px;
-            right: -3px;
-            background-color: #2879fe;
+            top: -2px;
+            right: -2px;
+            background-color: var(--accent-color);
             color: white;
             font-size: 10px;
             border-radius: 50%;
-            height: 14px;
-            width: 14px;
+            height: 10px;
+            width: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -150,7 +150,21 @@
   outline: none;
   border: none;
   overflow: hidden;
+  transition: all 12ms ease;
   margin-right: 10px;
+
+  &.isActive {
+    &::before {
+      transform: rotate(-45deg) translate(-6px, 7px);
+    }
+    .bar {
+      opacity: 0;
+    }
+
+    &::after {
+      transform: rotate(45deg) translate(-4px, -5px);
+    }
+  }
 
   @include tablet {
     display: block;
@@ -193,5 +207,72 @@
     border-radius: 3px;
     transform: translateX(-8px);
     -webkit-border-radius: 3px;
+  }
+}
+
+.mobile-nav {
+  position: absolute;
+  top: 60px;
+  min-height: calc(100vh - 60px);
+  left: -100%;
+  padding: 20px 10px 10px 10px;
+  width: 100%;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &.isOpen {
+    left: 0px;
+  }
+
+  .mob-nav-link {
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #414141;
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  .expandable {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    .icon {
+      transition: all 0.25s ease;
+
+      &.down {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  .expandable-menu {
+    height: 0px;
+    overflow: hidden;
+    transform: translateY(-25px);
+    transition: all 0.2s ease;
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .link {
+      border-bottom: 1px solid black;
+      padding-bottom: 15px;
+    }
+
+    &.isExpanded {
+      height: auto;
+      transform: translateY(0px);
+      z-index: 2;
+    }
   }
 }

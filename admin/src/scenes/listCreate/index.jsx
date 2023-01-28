@@ -1,5 +1,5 @@
 import { useTheme } from "@emotion/react";
-import { Button, TextField } from "@mui/material";
+import { Button, FormLabel, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { useState } from "react";
@@ -80,6 +80,10 @@ const CreateList = () => {
           id="content"
           onChange={handleSelect}
         >
+          <option disabled>
+            Select Multiple Products by ctrl + click. (Total products:{" "}
+            {products.length})
+          </option>
           {products.map((product) => (
             <option key={product._id} value={product._id}>
               {product.title}

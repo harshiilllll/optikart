@@ -32,6 +32,7 @@ const ProductForm = () => {
   const [input, setInputs] = useState({});
   const [urls, seturls] = useState([]);
   const [cat, setCat] = useState([]);
+  const [size, setSize] = useState([]);
   const [color, setColor] = useState([]);
   const [files, setFiles] = useState([]);
 
@@ -53,6 +54,10 @@ const ProductForm = () => {
 
   const handleColor = (e) => {
     setColor(e.target.value.split(","));
+  };
+
+  const handleSize = (e) => {
+    setSize(e.target.value.split(","));
   };
 
   const handleFileChange = (e) => {
@@ -111,6 +116,7 @@ const ProductForm = () => {
       ...input,
       color: color,
       categories: cat,
+      size: size,
       img: urls,
     };
     console.log(product);
@@ -191,6 +197,18 @@ const ProductForm = () => {
           required
           onChange={handleColor}
         />
+        <TextField
+          fullWidth
+          variant="filled"
+          type="text"
+          label="Size"
+          placeholder="Seperate sizes by comma ,"
+          name="size"
+          sx={{ gridColumn: "span 4" }}
+          inputProps={{ style: { textTransform: "lowercase" } }}
+          required
+          onChange={handleSize}
+        />
         <input
           type="file"
           name="img"
@@ -224,13 +242,6 @@ const ProductForm = () => {
         >
           UPLOAD
         </Button>
-        {/* <FormControl fullWidth>
-          <InputLabel>In Stock</InputLabel>
-          <Select defaultValue="true" name="inStock" onChange={handleChange}>
-            <MenuItem value="true">Yes</MenuItem>
-            <MenuItem value="false">No</MenuItem>
-          </Select>
-        </FormControl> */}
         <Box
           display="flex"
           justifyContent="start"

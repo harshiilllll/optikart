@@ -1,0 +1,62 @@
+@import "../../app.scss";
+
+.parallaxArea {
+  display: flex;
+  padding: 20px 80px;
+
+  @include tablet {
+    flex-direction: column !important;
+    padding: 10px;
+  }
+
+  .parallax {
+    padding: 50px;
+    flex: 1;
+    user-select: none;
+    min-height: 80vh;
+    pointer-events: none;
+  }
+
+  .parallaxContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 50px;
+    gap: 40px;
+
+    @include tablet {
+      flex-direction: column !important;
+      padding: 10px;
+    }
+
+    h1 {
+      font-size: 38px;
+      font-weight: 900;
+      background: linear-gradient(201deg, #3bb78f, #0bab64);
+      background-clip: text;
+      color: transparent;
+    }
+
+    p {
+      line-height: 30px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    button {
+      background: linear-gradient(201deg, #3bb78f, #0bab64);
+      color: white;
+      padding: 10px 20px;
+      max-width: fit-content;
+      border: none;
+      cursor: pointer;
+      transition: 0.4s ease;
+      border: 1px solid #0bab64;
+
+      &:hover {
+        background: transparent;
+        color: #0bab64;
+      }
+    }
+  }
+}

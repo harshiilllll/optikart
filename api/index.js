@@ -10,6 +10,8 @@ const orderRoute = require("./routes/order");
 const cartRoute = require("./routes/cart");
 const sliderRoute = require("./routes/slider");
 const listsRoute = require("./routes/lists");
+const categoriesRoute = require("./routes/categories");
+const settingsRoute = require("./routes/siteSettings");
 const stripeRoute = require("./routes/stripe");
 
 const mongoose = require("mongoose");
@@ -33,6 +35,8 @@ app.use("/api/orders", orderRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/slider", sliderRoute);
 app.use("/api/lists", listsRoute);
+app.use("/api/categories", categoriesRoute);
+app.use("/api/settings", settingsRoute);
 app.use("/api/checkout", stripeRoute);
 
 app.listen(PORT, () => {

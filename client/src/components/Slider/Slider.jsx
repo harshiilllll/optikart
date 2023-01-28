@@ -14,9 +14,9 @@ const Slider = () => {
         const res = await axios.get("/slider", {
           headers: {
             token:
-            "Bearer " +
-            JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
-              .user.accessToken,
+              "Bearer " +
+              JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
+                .user.accessToken,
           },
         });
         setSlider(res.data);
@@ -82,7 +82,14 @@ const Slider = () => {
         }}
       >
         {slider.map((slider) => (
-          <img src={slider.img} key={slider.img} alt="" />
+          <div className="slider-content">
+            <h1>{slider.title}</h1>
+            <picture>
+              <source media="(min-width: 900px)" srcset={slider.img} />
+              <source media="(min-width: 480px)" srcset={slider.imgSm} />
+              <img src={slider.imgSm} alt="banner" />
+            </picture>
+          </div>
         ))}
       </div>
       <div className="icons">

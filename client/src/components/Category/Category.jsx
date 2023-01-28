@@ -1,32 +1,34 @@
 import "./category.scss";
 import CategoryItem from "../CategoryItem/CategoryItem";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Category = () => {
-  const data = [
-    {
-      id: 1,
-      img: "https://images.pexels.com/photos/14755201/pexels-photo-14755201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "EYE GLASSES",
-      cat: "Unisex",
-    },
-    {
-      id: 2,
-      img: "https://images.pexels.com/photos/13142472/pexels-photo-13142472.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "SUNGLASSES",
-      cat: "Comfort",
-    },
-    {
-      id: 3,
-      img: "https://images.pexels.com/photos/5480696/pexels-photo-5480696.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-      title: "CONTACT LENSES",
-      cat: "Sunglasses",
-    },
-  ];
+  //fetch categories
+  const [cat, setCat] = useState([]);
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const res = await axios.get("/categories", {
+          headers: {
+            token:
+              "Bearer " +
+              JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
+                .user.accessToken,
+          },
+        });
+        setCat(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCategories();
+  }, []);
 
   return (
     <div className="category">
-      {data.map((item) => (
-        <CategoryItem item={item} key={item.id} />
+      {cat.slice(0, 3).map((item) => (
+        <CategoryItem item={item} key={item._id} />
       ))}
     </div>
   );
