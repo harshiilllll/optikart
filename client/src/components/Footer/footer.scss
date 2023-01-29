@@ -7,6 +7,7 @@
   flex-direction: column;
   padding: 50px 80px;
   gap: 80px;
+  background-color: var(--accent-font);
 
   @include tablet {
     padding: 40px 30px;
@@ -31,13 +32,18 @@
       h1 {
         font-size: 18px;
         font-weight: 700;
-        color: #777;
+        color: rgb(206, 206, 206);
         margin-bottom: 5px;
       }
 
       span {
         cursor: pointer;
         width: fit-content;
+        color: rgb(236, 236, 236);
+      }
+
+      p {
+        color: rgb(236, 236, 236);
       }
 
       .link {
@@ -45,6 +51,7 @@
         align-items: center;
         margin-block: 5px;
         gap: 5px;
+        color: rgb(236, 236, 236);
       }
     }
   }
@@ -54,7 +61,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    border-top: 1px solid #777;
+    border-top: 1px solid rgb(236, 236, 236);;
     flex-wrap: wrap;
     padding-top: 20px;        
 
@@ -67,6 +74,11 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      color: rgb(201, 201, 201);
+
+      .logo {
+        color: rgb(236, 236, 236);
+      }
 
       div{
         display: flex;

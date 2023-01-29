@@ -15,6 +15,7 @@
 
 html {
   color-scheme: light;
+  scroll-behavior: smooth;
 }
 
 /* force styling of type through styling, rather than elements */
@@ -54,10 +55,10 @@ code {
 .logo {
   color: #333;
   text-decoration: none;
-  font-size: 22px;
-  letter-spacing: 1px;
+  font-size: 24px;
+  letter-spacing: 4px;
   font-family: "Urbanist", sans-serif;
-  font-weight: 600;
+  font-weight: 500;
 
   &::after {
     content: "";

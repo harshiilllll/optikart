@@ -19,7 +19,6 @@ const Product = () => {
   const [color, setColor] = useState(item.color[0]);
   const [size, setSize] = useState(item.size[0]);
 
-  console.log(item);
 
   useEffect(() => {
     window.scrollTo(0, 0);

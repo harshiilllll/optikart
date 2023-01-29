@@ -2,34 +2,34 @@ import ProductCard from "../ProductCard/ProductCard";
 import "./Products.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 const Products = ({ category, filters, sort, clearFilters }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-
+  const search = useLocation().search;
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await axios.get(
-          category ? `/products?category=${category}` : "/products",
-          {
-            headers: {
-              token:
-                "Bearer " +
-                JSON.parse(
-                  JSON.parse(localStorage.getItem("persist:root")).user
-                ).user.accessToken,
-            },
-          }
-        );
+        let url = category ? `/products?category=${category}` : "/products";
+        if (search) {
+          url = `/products/search${search}`;
+        }
+        const res = await axios.get(url, {
+          headers: {
+            token:
+              "Bearer " +
+              JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
+                .user.accessToken,
+          },
+        });
         setProducts(res.data);
       } catch (error) {
         console.log(error);
       }
     };
     getProducts();
-  }, [category]);
+  }, [category, search]);
 
   useEffect(() => {
     setFilteredProducts(
@@ -68,8 +68,14 @@ const Products = ({ category, filters, sort, clearFilters }) => {
     <div className="products">
       {filteredProducts.length === 0 && (
         <>
-          <h1>No results.</h1>
-          <Link to={`/products`}>Browse All Products</Link>
+          <h1>No products at the moment.</h1>
+          <Link
+            to={`/products`}
+            className="link"
+            style={{ textDecoration: "underline" }}
+          >
+            Browse All Products
+          </Link>
         </>
       )}
       {filteredProducts.map((item) => (

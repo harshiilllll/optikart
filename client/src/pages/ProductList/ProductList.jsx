@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import Products from "../../components/Products/Products";
-import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import "./ProductList.scss";
+import TopBanner from "../../components/TopBanner/TopBanner";
 
 const ProductList = () => {
   useEffect(() => {
@@ -31,8 +31,9 @@ const ProductList = () => {
 
   return (
     <>
+      <TopBanner />
       <div className="productList">
-        <h1 className="heading">{category ? category : "All"} Glasses</h1>
+        <h1 className="heading">{category ? category : "All Glasses"}</h1>
         <div className="filterContainer">
           <div className="filter">
             <span className="filterText">
@@ -89,9 +90,7 @@ const ProductList = () => {
               defaultValue="Sort by"
               name="sort"
             >
-              <option value="" disabled>
-                Sort by
-              </option>
+              <option value="">Sort by</option>
               <option value="newest">Newest</option>
               <option value="asc">Price (acs)</option>
               <option value="dsc">Price (dsc)</option>

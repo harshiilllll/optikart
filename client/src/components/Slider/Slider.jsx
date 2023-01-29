@@ -82,11 +82,11 @@ const Slider = () => {
         }}
       >
         {slider.map((slider) => (
-          <div className="slider-content">
-            <h1>{slider.title}</h1>
+          <div className="slider-content" key={slider._id}>
+            {/* <h1>{slider.title}</h1> */}
             <picture>
-              <source media="(min-width: 900px)" srcset={slider.img} />
-              <source media="(min-width: 480px)" srcset={slider.imgSm} />
+              <source media="(min-width: 900px)" srcSet={slider.img} />
+              <source media="(min-width: 480px)" srcSet={slider.imgSm} />
               <img src={slider.imgSm} alt="banner" />
             </picture>
           </div>

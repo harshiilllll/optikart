@@ -1,17 +1,19 @@
+import { useSelector } from "react-redux";
 import "./ContactUs.scss";
 
 const ContactUs = () => {
+  const brand = useSelector((state) => state.settings);
   return (
     <div className="contact">
       <h1>Contact Us</h1>
-      <span>1 10th Street, Brownwood,tx, 36801 United States</span>
+      <span>{brand.address}</span>
       <span>
         <b>Email:</b>
-        optikart@gmail.com
+        {brand.brandEmail}
       </span>
       <span>
         <b>Number:</b>
-        9876543210
+        {brand.brandNumber}
       </span>
     </div>
   );

@@ -38,8 +38,8 @@ const Cart = () => {
             {cart.products.length === 0 && (
               <span>No products in your cart. Continue Shopping!</span>
             )}
-            {cart.products.map((item) => (
-              <div key={item._id}>
+            {cart.products.map((item, i) => (
+              <div key={item._id + i}>
                 <div className="product">
                   <div className="product-detail">
                     <img src={item.img[0]} alt="" />

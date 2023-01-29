@@ -6,16 +6,19 @@ import {
   KeyboardArrowDown,
   KeyboardArrowRight,
   Search,
+  CloseOutlined,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LOGO from "../../img/LOGO.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/userRedux";
+import { useRef } from "react";
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenSearch, setIsOpenSearch] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
@@ -38,6 +41,53 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const brandName = useSelector((state) => state.settings.brandName);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleCloseSearch);
+    return () => window.removeEventListener("scroll", handleCloseSearch);
+  }, []);
+
+  const handleCloseSearch = () => {
+    setIsOpenSearch(false);
+  };
+
+  //Search
+  const searchRef = useRef(null);
+  const [q, setQ] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (!q) return;
+    navigate(`/products/search?q=${q}`);
+    setIsOpenSearch(false);
+  };
+
+  //Autofocus on search open
+  useEffect(() => {
+    if (isOpenSearch) {
+      searchRef.current.focus();
+      searchRef.current.value = "";
+    }
+  }, [isOpenSearch]);
+
+  //Shortcut keys
+  const handleKeyPress = (event) => {
+    if (event.key === " " && !isOpenSearch) {
+      setIsOpenSearch(true);
+    }
+    if (event.key === "Escape" && isOpenSearch) {
+      setIsOpenSearch(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [isOpenSearch]);
 
   return (
     <>
@@ -96,7 +146,10 @@ const Navbar = () => {
               </Link>
             </li>
             <div className="icons">
-              <Search className="icon" />
+              <Search
+                className="icon"
+                onClick={() => setIsOpenSearch(!isOpenSearch)}
+              />
               <FavoriteBorderOutlined className="icon" />
               <div className="cart-icon">
                 <Link to="/cart" className="link">
@@ -107,6 +160,28 @@ const Navbar = () => {
             </div>
           </ul>
         </div>
+        <form
+          onSubmit={handleSearch}
+          className={
+            isOpenSearch ? `search-container search-opened` : "search-container"
+          }
+        >
+          <div className="input-container">
+            <input
+              type="text"
+              placeholder="Enter keywords..."
+              ref={searchRef}
+              onChange={(e) => {
+                setQ(e.target.value);
+              }}
+            />
+            <Search className="search-icon" />
+          </div>
+          <CloseOutlined
+            className="close-icon"
+            onClick={() => setIsOpenSearch(false)}
+          />
+        </form>
         <nav className={isOpen ? "mobile-nav isOpen" : "mobile-nav"}>
           <Link
             to={`/`}

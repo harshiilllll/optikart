@@ -50,13 +50,9 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 5rem;
+    bottom: 20px;
     gap: 10px;
     margin: auto;
-
-    @include tablet {
-      bottom: 20px;
-    }
 
     .icon {
       width: 50px;
