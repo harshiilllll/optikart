@@ -51,11 +51,11 @@ OPTIKART is an E-Commerce web application developed using Node, MongoDB, Express
    `cd api`
    `npm start`
 
--Start the client
+- Start the client
 `cd client`
 `npm start`
 
--Start the admin
+- Start the admin
 `cd admin`
 `npm start`
 
