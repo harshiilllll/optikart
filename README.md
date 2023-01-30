@@ -1,6 +1,6 @@
 # OPTIKART - A React E-Commerce Web App
 
-OPTIKART is an E-Commerce web application developed using Node, MongoDB, Express, React and REST APIs. It provides a platform for users to buy and sell products in a seamless and user-friendly manner.
+OPTIKART is an E-Commerce web application which sells glasses, developed using Node, MongoDB, Express, React and REST APIs. It provides a platform for users to buy and sell products in a seamless and user-friendly manner.
 
 ## Key Features
 
