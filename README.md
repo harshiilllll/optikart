@@ -29,23 +29,23 @@ OPTIKART is an E-Commerce web application developed using Node, MongoDB, Express
    https://github.com/harshiilllll/optikart.git
 
 2. Change into the project directory
-   cd optikart-main
+   `cd optikart-main`
 
 3. Install the required packages
-   npm install
+   `npm install`
 
 4. Create a .env file in the following directories and configure the following environment variables:
 
-### admin
+> > > admin
+> > >
+> > > > > > PORT=YOUR-PORT-YOU-WANT-TO-RUN-ADMIN
+> > > > > > FIREBASE_API=YOUR-FIREBASE-SECRET-API-KEY
 
-PORT=<YOUR-PORT-YOU-WANT-TO-RUN-ADMIN>
-FIREBASE_API=<YOUR-FIREBASE-SECRET-API-KEY>
+> > > api
 
-### api
-
-MONGO_URL=<YOUR-MONGODB-URL>
-SECRET_KEY=<YOUR-SECERET-KEY>
-STRIPE_KEY=<YOUR-STRIPE-SECRET-KEY>
+> > > > > > MONGO_URL=YOUR-MONGODB-URL
+> > > > > > SECRET_KEY=YOUR-SECERET-KEY>
+> > > > > > STRIPE_KEY=YOUR-STRIPE-SECRET-KEY
 
 5. Start the server
    `cd api`
