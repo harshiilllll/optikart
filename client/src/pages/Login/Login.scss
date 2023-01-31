@@ -1,23 +1,15 @@
 .login {
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(rgba(255 255 255 / 50%), rgba(255 255 255 / 50%)),
-    url(https://images.unsplash.com/photo-1617370447481-f4691f05d6f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8b25lfGVufDB8fDB8d2hpdGV8&w=1000&q=80);
-  background-size: cover;
-  background-position: right;
 
   .form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 20px;
-    background-color: white;
-    padding: 30px 50px;
-    width: 30vw;
     border-radius: 8px;
-    box-shadow: 0 4px 40px 6px rgba(0 0 0 / 50%);
 
     .inputs {
       display: flex;
@@ -25,28 +17,50 @@
       gap: 10px;
 
       input {
-        background-color: rgb(200, 237, 237);
+        background-color: transparent;
+        border-bottom: 2px solid #333;
+        outline: none;
+        border-radius: 0px;
+      }
+
+      label {
+        letter-spacing: 2px;
+        font-weight: 300;
       }
     }
 
     h1 {
-      font-size: 28px;
-      font-weight: 600;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-align: center;
     }
 
     input {
-      padding: 15px 20px;
+      padding: 15px 0px;
       border-radius: 4px;
+      font-size: 20px;
       border: none;
+      width: 80vw;
+      max-width: 400px;
+    }
+
+    input[type="password"] {
+      font-family: Verdana;
+      letter-spacing: 1px;
     }
 
     .button {
       cursor: pointer;
-      background-color: teal;
+      background-color: black;
       color: white;
       font-weight: 600;
       outline: none;
-      transition: all 0.5s ease;
+      transition: 0.5s ease;
+      border-radius: 0px;
+      font-weight: 200;
+      font-size: 18px;
+      letter-spacing: 2px;
 
       &:disabled {
         cursor: not-allowed;
@@ -54,13 +68,34 @@
       }
 
       &:hover {
-        background-color: rgb(0, 68, 68);
+        background-color: #222;
       }
     }
 
     .link {
-      text-decoration: underline;
-      margin-left: 5px;
+      letter-spacing: 2px;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    .error {
+      border: 1px solid red;
+      color: red;
+      background-color: rgb(254, 254, 254);
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      letter-spacing: 1px;
+
+      &::before {
+        content: "";
+        margin-right: 10px;
+        border-radius: 50%;
+        height: 5px;
+        width: 5px;
+        background-color: red;
+      }
     }
   }
 }

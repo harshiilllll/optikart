@@ -15,14 +15,7 @@ const Products = ({ category, filters, sort, clearFilters }) => {
         if (search) {
           url = `/products/search${search}`;
         }
-        const res = await axios.get(url, {
-          headers: {
-            token:
-              "Bearer " +
-              JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
-                .user.accessToken,
-          },
-        });
+        const res = await axios.get(url);
         setProducts(res.data);
       } catch (error) {
         console.log(error);

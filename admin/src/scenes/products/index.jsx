@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, useTheme } from "@mui/material";
+import { Avatar, Box, Button, useTheme, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
+import { format } from "timeago.js";
 
 const Products = () => {
   const theme = useTheme();
@@ -82,9 +83,14 @@ const Products = () => {
         ),
     },
     {
-      field: "email",
-      headerName: "Email",
+      field: "createdAt",
+      headerName: "Created",
       flex: 1,
+      renderCell: (params) => (
+        <Typography color={colors.greenAccent[500]}>
+          {format(params.row.createdAt)}
+        </Typography>
+      ),
     },
     {
       field: "actions",

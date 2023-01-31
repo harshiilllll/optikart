@@ -9,14 +9,7 @@ const Category = () => {
   useEffect(() => {
     const getCategories = async () => {
       try {
-        const res = await axios.get("/categories", {
-          headers: {
-            token:
-              "Bearer " +
-              JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
-                .user.accessToken,
-          },
-        });
+        const res = await axios.get("/categories");
         setCat(res.data);
       } catch (error) {
         console.log(error);

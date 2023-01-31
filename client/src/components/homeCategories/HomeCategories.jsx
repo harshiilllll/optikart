@@ -8,14 +8,7 @@ const HomeCategories = () => {
   const [cats, setCats] = useState([]);
   useEffect(() => {
     const getCats = async () => {
-      const res = await axios.get("/categories", {
-        headers: {
-          token:
-            "Bearer " +
-            JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
-              .user.accessToken,
-        },
-      });
+      const res = await axios.get("/categories");
       setCats(res.data);
     };
     getCats();

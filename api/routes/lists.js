@@ -14,7 +14,7 @@ router.post("/", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //GET LISTS
-router.get("/", verify, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const lists = await List.find();
     res.status(200).json(lists);
@@ -36,6 +36,16 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
     res.status(200).json(updatedList);
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+//Delete list
+router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    await List.findByIdAndDelete(req.params.id);
+    res.status(200).json("LIST DELETED");
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 

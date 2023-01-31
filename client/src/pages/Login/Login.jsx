@@ -22,20 +22,22 @@ const Login = () => {
     <div className="login">
       <form className="form" onSubmit={(e) => e.preventDefault()}>
         <h1>Login</h1>
+        {error && <span className="error">Incorrect email or password</span>}
         <div className="inputs">
+          <label>Email</label>
           <input
             className="input"
             type="email"
-            placeholder="Email"
             autoComplete="off"
             onChange={(e) => {
               setEmail(e.target.value);
             }}
+            style={{ marginBottom: "20px" }}
           />
+          <label>Password</label>
           <input
             className="input"
             type="password"
-            placeholder="Password"
             autoComplete="off"
             onChange={(e) => {
               setPassword(e.target.value);
@@ -45,17 +47,13 @@ const Login = () => {
         <input
           className="button"
           type="submit"
-          value="Login"
+          value="SIGN IN"
           onClick={handleLogin}
           disabled={isFetching}
         />
-        {error && <span style={{ color: "red" }}>Something went wrong</span>}
-        <div>
-          Not registered?
-          <Link className="link" to="/register">
-            Create account
-          </Link>
-        </div>
+        <Link className="link" to="/register">
+          Create account
+        </Link>
       </form>
     </div>
   );

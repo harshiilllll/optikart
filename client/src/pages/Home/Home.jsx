@@ -13,14 +13,7 @@ const Home = () => {
   const [lists, setLists] = useState([]);
   useEffect(() => {
     const getLists = async () => {
-      const res = await axios.get("/lists", {
-        headers: {
-          token:
-            "Bearer " +
-            JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
-              .user.accessToken,
-        },
-      });
+      const res = await axios.get("/lists");
       setLists(res.data);
     };
     getLists();

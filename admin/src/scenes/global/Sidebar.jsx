@@ -15,6 +15,7 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import { AddBoxOutlined, Inventory2Outlined } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 
@@ -181,7 +182,7 @@ const Sidebar = () => {
             <Item
               title="Create List"
               to="/create-list"
-              icon={<AddBoxOutlined />}
+              icon={<PlaylistAddIcon />}
               selected={selected}
               setSelected={setSelected}
             />

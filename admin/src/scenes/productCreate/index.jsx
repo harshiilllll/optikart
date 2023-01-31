@@ -224,11 +224,12 @@ const ProductForm = () => {
             backgroundColor: colors.greenAccent[400],
             borderRadius: "4px",
             color: colors.primary[900],
-            fontSize: "16px",
+            fontSize: "14px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             gap: "5px",
+            minWidth: "100px"
           }}
         >
           <AddToPhotosOutlined />

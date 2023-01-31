@@ -1,8 +1,8 @@
 @import "../../app.scss";
 
 .navbar {
-  height: 60px;
-  padding-inline: 10px;
+  height: 70px;
+  padding-inline: 80px;
   display: flex;
   align-items: center;
   z-index: 1000;
@@ -12,10 +12,16 @@
   background-color: rgba(255 255 255 / 60%);
   transition: all 0.5s ease;
 
+  @include tablet {
+    padding: 10px;
+    height: 60px;
+  }
+
   &.scrolled {
     box-shadow: 0 1px 20px 5px rgba(0 0 0 / 10%);
     position: sticky;
     top: -1px;
+    height: 60px;
   }
 
   &.sticky {

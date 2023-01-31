@@ -14,7 +14,7 @@ router.post("/", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //Get category
-router.get("/", verify, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const categories = await Categories.find();
     res.status(200).json(categories);
@@ -23,10 +23,10 @@ router.get("/", verify, async (req, res) => {
   }
 });
 
-//GEt all
-router.get("/", verify, async (req, res) => {
+//GEt one
+router.get("/:id", async (req, res) => {
   try {
-    const category = Categories.find();
+    const category = await Categories.findById(req.params.id);
     res.status(200).json(category);
   } catch (error) {
     res.status(500).json(error);

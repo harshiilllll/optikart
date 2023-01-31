@@ -8,14 +8,7 @@ const Card = ({ item }) => {
 
   useEffect(() => {
     const getProduct = async () => {
-      const res = await axios.get("/products/find/" + item, {
-        headers: {
-          token:
-            "Bearer " +
-            JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
-              .user.accessToken,
-        },
-      });
+      const res = await axios.get("/products/find/" + item);
       setProduct(res.data);
     };
     getProduct();
@@ -31,12 +24,7 @@ const Card = ({ item }) => {
       <div className="card">
         <div className="images">
           <img src={product.img} className="img" title={product.title} alt="" />
-          <img
-            src={product.img}
-            className="img"
-            title={product.title}
-            alt=""
-          />
+          <img src={product.img} className="img" title={product.title} alt="" />
         </div>
         {/* <div className="detail">
           <div className="title">{product.title}</div>

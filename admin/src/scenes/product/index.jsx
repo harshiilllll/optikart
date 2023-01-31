@@ -11,7 +11,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Header from "../../components/Header";
 import { tokens } from "../../theme";
 import {
@@ -26,7 +26,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { async } from "@firebase/util";
 
 const Product = () => {
   const theme = useTheme();
@@ -37,7 +36,31 @@ const Product = () => {
   const [urls, seturls] = useState([]);
   const [cat, setCat] = useState([]);
   const [color, setColor] = useState([]);
+  const [size, setSize] = useState([]);
   const [files, setFiles] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let updatedProduct = {};
+    for (const [key, value] of Object.entries(input)) {
+      if (product[key] !== value) {
+        updatedProduct[key] = value;
+      }
+    }
+    if (cat.length) updatedProduct.categories = cat;
+    if (color.length) updatedProduct.color = color;
+    if (size.length) updatedProduct.size = size;
+    if (urls.length) updatedProduct.img = urls;
+    if (input.price) updatedProduct.price = Number(input.price);
+    updatedProduct = { ...product, ...updatedProduct };
+    updateProduct(id, updatedProduct, dispatch)
+      .then(() => {
+        toast.success("Product Updated Successfully!");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   // console.log("Inputs:", input);
   // console.log("Cat:", cat);
@@ -57,6 +80,10 @@ const Product = () => {
 
   const handleColor = (e) => {
     setColor(e.target.value.split(","));
+  };
+
+  const handleSize = (e) => {
+    setSize(e.target.value.split(","));
   };
 
   const handleFileChange = (e) => {
@@ -115,24 +142,6 @@ const Product = () => {
     state.products.products.find((item) => item._id === id)
   );
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let updatedProduct = {};
-    for (const [key, value] of Object.entries(input)) {
-      if (product[key] !== value && key !== "title") {
-        updatedProduct[key] = value;
-      }
-    }
-    updatedProduct = { ...product, ...updatedProduct };
-    updateProduct(id, updatedProduct, dispatch)
-      .then(() => {
-        toast.success("Product Updated Successfully!");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   return (
     <form style={{ margin: "20px" }} onSubmit={handleSubmit}>
       <Header title={`EDIT PRODUCT`} subtitle={product.title} />
@@ -151,7 +160,6 @@ const Product = () => {
           placeholder={product?.title}
           sx={{ gridColumn: "span 2" }}
           onChange={handleChange}
-          required
         />
         <TextField
           fullWidth
@@ -162,7 +170,6 @@ const Product = () => {
           placeholder={`${product?.price}`}
           sx={{ gridColumn: "span 1" }}
           onChange={handleChange}
-          required
         />
         <TextField
           fullWidth
@@ -173,7 +180,6 @@ const Product = () => {
           placeholder={`${product?.oldPrice}`}
           sx={{ gridColumn: "span 1" }}
           onChange={handleChange}
-          required
         />
         <TextField
           fullWidth
@@ -184,7 +190,6 @@ const Product = () => {
           placeholder={product?.desc}
           sx={{ gridColumn: "span 4" }}
           onChange={handleChange}
-          required
         />
         <TextField
           fullWidth
@@ -196,7 +201,6 @@ const Product = () => {
           sx={{ gridColumn: "span 4" }}
           inputProps={{ style: { textTransform: "lowercase" } }}
           onChange={handleCat}
-          required
         />
         <TextField
           fullWidth
@@ -208,7 +212,18 @@ const Product = () => {
           sx={{ gridColumn: "span 4" }}
           inputProps={{ style: { textTransform: "lowercase" } }}
           onChange={handleColor}
+        />
+        <TextField
+          fullWidth
+          variant="filled"
+          type="text"
+          label="Size"
+          placeholder={product.size}
+          name="size"
+          sx={{ gridColumn: "span 4" }}
+          inputProps={{ style: { textTransform: "lowercase" } }}
           required
+          onChange={handleSize}
         />
         <input
           type="file"
@@ -217,7 +232,6 @@ const Product = () => {
           id="img"
           style={{ display: "none" }}
           onChange={handleFileChange}
-          required
         />
         <InputLabel
           htmlFor="img"

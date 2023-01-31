@@ -9,6 +9,11 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="top">
+        {/* <div className="item subscribe">
+          <h1>Stay in the know.</h1>
+          <input type="text" placeholder="Email" />
+          <button>Subscribe</button>
+        </div> */}
         <div className="item">
           <h1>Categories</h1>
           <span>Men</span>
@@ -29,7 +34,7 @@ const Footer = () => {
           <span>Eyeglasses</span>
           <span>Contact Lenses</span>
         </div>
-        <div className="item">
+        <div className="item contact-footer">
           <h1>Contact</h1>
           <p>{brand.address}</p>
           <a className="link" href="mailto:">

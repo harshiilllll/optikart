@@ -44,12 +44,15 @@ const listSlice = createSlice({
       state.isFetching = true;
     },
     deleteListSuccess(state, action) {
-      state.lists.splice(
-        state.lists.findIndex((item) => item._id === action.payload),
-        1
+      const newLists = state.lists.filter(
+        (item) => item._id !== action.payload
       );
-      state.isFetching = false;
-      state.error = false;
+      return {
+        ...state,
+        lists: newLists,
+        isFetching: false,
+        error: false,
+      };
     },
     deleteListFailure(state) {
       state.error = true;

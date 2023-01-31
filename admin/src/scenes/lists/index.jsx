@@ -4,14 +4,13 @@ import { tokens } from "../../theme";
 import Header from "../../components/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getLists } from "../../redux/apiCalls";
+import { deleteList, getLists } from "../../redux/apiCalls";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 
 const Lists = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  
 
   const dispatch = useDispatch();
 
@@ -22,8 +21,8 @@ const Lists = () => {
   const lists = useSelector((state) => state.lists.lists);
 
   //Delete
-  const handleDelete = (e) => {
-    //
+  const handleDelete = (id) => {
+    deleteList(id, dispatch);
   };
 
   const columns = [

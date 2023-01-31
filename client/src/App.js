@@ -39,7 +39,7 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: user ? <Layout /> : <Login />,
+      element: <Layout />,
       children: [
         {
           path: "/",
@@ -59,7 +59,7 @@ const App = () => {
         },
         {
           path: "/cart/",
-          element: <Cart />,
+          element: user ? <Cart /> : <Login />,
         },
         {
           path: "/about",
@@ -69,23 +69,24 @@ const App = () => {
           path: "/contact/",
           element: <ContactUs />,
         },
+
+        {
+          path: "/login",
+          element: user ? <Navigate to="/" /> : <Login />,
+        },
+        {
+          path: "/register",
+          element: user ? <Navigate to="/" /> : <Register />,
+        },
+        {
+          path: "/payment/",
+          element: <Payment />,
+        },
+        {
+          path: "/success/",
+          element: <Success />,
+        },
       ],
-    },
-    {
-      path: "/login",
-      element: user ? <Navigate to="/" /> : <Login />,
-    },
-    {
-      path: "/register",
-      element: user ? <Navigate to="/" /> : <Register />,
-    },
-    {
-      path: "/payment/",
-      element: <Payment />,
-    },
-    {
-      path: "/success/",
-      element: <Success />,
     },
   ]);
 

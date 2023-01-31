@@ -19,14 +19,7 @@ export const login = async (dispatch, user) => {
 export const getSettings = async (dispatch) => {
   dispatch(getSettingsStart());
   try {
-    const res = await axios.get("/settings", {
-      headers: {
-        token:
-          "Bearer " +
-          JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).user
-            .accessToken,
-      },
-    });
+    const res = await axios.get("/settings");
     dispatch(getSettingsSuccess(res.data));
   } catch (error) {
     dispatch(getSettingsFaliure());

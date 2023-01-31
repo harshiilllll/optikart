@@ -11,51 +11,20 @@ const Register = () => {
   return (
     <div className="register">
       <form className="form" onSubmit={(e) => e.preventDefault()}>
-        <h1>Register</h1>
+        <h1>Create Account</h1>
         <div className="inputs">
-          <input
-            className="input"
-            type="text"
-            placeholder="First Name"
-            autoComplete="off"
-          />
-          <input
-            className="input"
-            type="text"
-            placeholder="Last Name"
-            autoComplete="off"
-          />
+          <label>First Name</label>
+          <input className="input" type="text" autoComplete="off" />
+          <label>Last Name</label>
+          <input className="input" type="text" autoComplete="off" />
+          <label>Username</label>
+          <input className="input" type="text" autoComplete="off" />
+          <label>Email</label>
+          <input className="input" type="email" autoComplete="off" />
+          <label>Password</label>
+          <input className="input" type="password" autoComplete="off" />
         </div>
-        <div className="inputs">
-          <input
-            className="input"
-            type="text"
-            placeholder="Username"
-            autoComplete="off"
-          />
-          <input
-            className="input"
-            type="email"
-            placeholder="Email"
-            autoComplete="off"
-          />
-        </div>
-        <div className="inputs">
-          <input
-            className="input"
-            type="password"
-            placeholder="Password"
-            autoComplete="off"
-          />
-          <input
-            className="input"
-            type="password"
-            placeholder="Confirm Password"
-            autoComplete="off"
-          />
-        </div>
-        <input className="button" type="submit" value="Register" />
-        <Link className="link" to="/login">Alredy registered?</Link>
+        <input className="button" type="submit" value="CREATE" />
       </form>
     </div>
   );

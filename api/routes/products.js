@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const Product = require("../schemas/Product");
-const { verify, verifyTokenAndAdmin } = require("../verifyToken");
+const { verifyTokenAndAdmin } = require("../verifyToken");
 
 //CREATE PRODUCT
 router.post("/", verifyTokenAndAdmin, async (req, res) => {
@@ -40,7 +40,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //GET PRODUCT
-router.get("/find/:id", verify, async (req, res) => {
+router.get("/find/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     res.status(200).json(product);
@@ -50,7 +50,7 @@ router.get("/find/:id", verify, async (req, res) => {
 });
 
 //GET ALL PRODUCTS
-router.get("/", verify, async (req, res) => {
+router.get("/", async (req, res) => {
   const queryNew = req.query.new;
   const queryCategory = req.query.category;
   try {
@@ -96,7 +96,7 @@ router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //SEARCH PRODUCT
-router.get("/search", verify, async (req, res) => {
+router.get("/search", async (req, res) => {
   const query = req.query.q;
   try {
     const product = await Product.find({

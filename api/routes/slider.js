@@ -14,7 +14,7 @@ router.post("/", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //GET ALL
-router.get("/", verify, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const slider = await Slider.find();
     res.status(200).json(slider);

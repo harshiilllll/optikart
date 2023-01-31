@@ -26,6 +26,9 @@ import {
   addListFailure,
   addListStart,
   addListSuccess,
+  deleteListFailure,
+  deleteListStart,
+  deleteListSuccess,
   getListsFailure,
   getListsStart,
   getListsSuccess,
@@ -204,5 +207,23 @@ export const updateList = async (id, updatedList, dispatch) => {
     dispatch(updateListSuccess({ id, updatedList }));
   } catch (error) {
     dispatch(updateListFailure());
+  }
+};
+
+//Delete List
+export const deleteList = async (id, dispatch) => {
+  dispatch(deleteListStart());
+  try {
+    await axios.delete("/lists/" + id, {
+      headers: {
+        token:
+          "Bearer " +
+          JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).user
+            .accessToken,
+      },
+    });
+    dispatch(deleteListSuccess(id));
+  } catch (error) {
+    dispatch(deleteListFailure());
   }
 };
