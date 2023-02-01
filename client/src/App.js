@@ -78,15 +78,15 @@ const App = () => {
           path: "/register",
           element: user ? <Navigate to="/" /> : <Register />,
         },
-        {
-          path: "/payment/",
-          element: <Payment />,
-        },
-        {
-          path: "/success/",
-          element: <Success />,
-        },
       ],
+    },
+    {
+      path: "/payment/",
+      element: <Payment />,
+    },
+    {
+      path: "/checkout-success",
+      element: <Success />,
     },
   ]);
 
@@ -94,7 +94,7 @@ const App = () => {
 
   useEffect(() => {
     getSettings(dispatch);
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

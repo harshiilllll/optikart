@@ -37,7 +37,7 @@ app.use("/api/slider", sliderRoute);
 app.use("/api/lists", listsRoute);
 app.use("/api/categories", categoriesRoute);
 app.use("/api/settings", settingsRoute);
-app.use("/api/checkout", stripeRoute);
+app.use("/api/stripe", stripeRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
