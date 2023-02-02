@@ -51,6 +51,7 @@ const Dashboard = () => {
     };
     getOrders();
   }, []);
+  console.log(orders);
 
   return (
     <Box m="20px">
@@ -187,10 +188,11 @@ const Dashboard = () => {
               borderBottom={`4px solid ${colors.primary[500]}`}
               p="15px"
             >
+              <Box color={colors.grey[100]}>{order.shipping.name}</Box>
               <Box>
                 <Typography
                   color={colors.greenAccent[500]}
-                  variant="h5"
+                  variant="body1"
                   fontWeight="600"
                 >
                   {order._id}
@@ -199,13 +201,12 @@ const Dashboard = () => {
                   {format(order.createdAt)}
                 </Typography>
               </Box>
-              <Box color={colors.grey[100]}>{order.address}</Box>
               <Box
                 backgroundColor={colors.greenAccent[500]}
                 p="5px 10px"
                 borderRadius="4px"
               >
-                ${order.amount}
+                {order.total}
               </Box>
             </Box>
           ))}
