@@ -5,7 +5,7 @@ import "./Cart.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { removeProduct } from "../../redux/cartRedux";
-import Payment from "../Payment";
+import PaymentButton from "../PaymentButton";
 
 const Cart = () => {
   useEffect(() => {
@@ -32,7 +32,7 @@ const Cart = () => {
             <div className="text">My Bag({cart.products.length})</div>
             <div className="text">Wishlist(4)</div>
           </div>
-          <button className="checkout-btn">CHECKOUT NOW</button>
+          <PaymentButton cart={cart} className="checkout-btn" />
         </div>
         <div className="bottom">
           <div className="info">
@@ -109,7 +109,7 @@ const Cart = () => {
                 <span className="summary-item-text">Total</span>
                 <span className="summary-item-text">Rs. {cart.totalPrice}</span>
               </div>
-              <Payment cart={cart} />
+              <PaymentButton className="checkout-btn" cart={cart} />
             </div>
           )}
         </div>

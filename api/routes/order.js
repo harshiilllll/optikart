@@ -18,14 +18,14 @@ router.post("/", verify, async (req, res) => {
 });
 
 //UPDATE Order
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.put("/:userId", async (req, res) => {
   try {
-    const updatedOrder = await Order.findByIdAndUpdate(
-      req.params.id,
+    const updatedOrder = await Order.findOneAndUpdate(
+      { userId: req.params.userId },
       {
         $set: req.body,
       },
-      { new: true }
+      { sort: { createdAt: -1 }, new: true }
     );
     res.status(200).json(updatedOrder);
   } catch (err) {
@@ -44,9 +44,11 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //GET USER ORDERS
-router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
+router.get("/find/:userId", verify, async (req, res) => {
   try {
-    const orders = await Order.findOne({ userId: req.params.userId });
+    const orders = await Order.findOne({ userId: req.params.userId })
+      .sort({ createdAt: -1 })
+      .limit(1);
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json(error);

@@ -26,6 +26,12 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use(cors());
+// app.post(
+//   "/api/stripe/webhook",
+//   express.raw({ type: "application/json" }),
+//   stripeRoute
+// );
+
 app.use(express.json());
 
 app.use("/api/auth", authRoute);

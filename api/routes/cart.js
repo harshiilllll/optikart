@@ -7,7 +7,7 @@ const {
 } = require("../verifyToken");
 
 //CREATE CART
-router.post("/", verify, async (req, res) => {
+router.post("/", async (req, res) => {
   const newCart = new Cart(req.body);
   try {
     const savedCart = await newCart.save();
@@ -18,10 +18,10 @@ router.post("/", verify, async (req, res) => {
 });
 
 //UPDATE CART
-router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.patch("/:userId", async (req, res) => {
   try {
-    const updatedCart = await Cart.findByIdAndUpdate(
-      req.params.id,
+    const updatedCart = await Cart.findOneAndUpdate(
+      { userId: req.params.userId },
       {
         $set: req.body,
       },
@@ -44,7 +44,7 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 //GET USER CART
-router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
+router.get("/find/:userId", async (req, res) => {
   try {
     const cart = await Cart.findOne({ userId: req.params.userId });
     res.status(200).json(cart);
@@ -57,7 +57,7 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
     const carts = await Cart.find();
-    res.status(200).json(carts)
+    res.status(200).json(carts);
   } catch (error) {
     res.status(500).json(error);
   }

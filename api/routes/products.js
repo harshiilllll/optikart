@@ -103,6 +103,7 @@ router.get("/search", async (req, res) => {
       $or: [
         { title: { $regex: query, $options: "i" } },
         { categories: { $regex: query, $options: "i" } },
+        { desc: { $regex: query, $options: "i" } },
       ],
     });
     res.status(200).json(product);

@@ -1,7 +1,6 @@
 @import "../../app.scss";
 
 .cart {
-  min-height: 100vh;
 
   .wrapper {
     padding: 20px 80px;
@@ -39,7 +38,7 @@
         transition: 0.2s ease-out;
         border: 1px solid black;
 
-        &:hover {
+        &.checkout-btn:hover {
           background-color: white;
           color: black;
         }
@@ -85,7 +84,6 @@
       }
 
       .info {
-
         span {
           font-size: 24px;
           margin-bottom: 20px;
@@ -138,7 +136,7 @@
                 height: 15px;
                 width: 15px;
                 border-radius: 50%;
-                border: 1PX SOLID black;
+                border: 1px SOLID black;
               }
 
               .product-size {
@@ -239,12 +237,20 @@
           outline: none;
           background-color: black;
           color: white;
+          border: 1px solid black;
           padding: 10px 20px;
           cursor: pointer;
           width: 100%;
           font-weight: 600;
           margin-top: 20px;
           align-self: baseline;
+          transition: 0.3s ease;
+
+          &:hover {
+            background-color: white;
+            border: 1px solid black;
+            color: black;
+          }
         }
       }
     }

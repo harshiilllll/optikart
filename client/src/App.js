@@ -13,14 +13,14 @@ import Footer from "./components/Footer/Footer";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Cart from "./pages/Cart/Cart";
-import Payment from "./pages/Payment";
-import Success from "./pages/Success";
+import Success from "./pages/Success/Success";
 import { useDispatch, useSelector } from "react-redux";
 import Notice from "./components/Notice/Notice";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import About from "./pages/About/About";
-import { useEffect } from "react";
-import { getSettings } from "./redux/apiCalls";
+import { useCallback, useEffect } from "react";
+import { getCart, getSettings } from "./redux/apiCalls";
+import axios from "axios";
 
 const App = () => {
   const user = useSelector((state) => state.user.user);
@@ -81,20 +81,54 @@ const App = () => {
       ],
     },
     {
-      path: "/payment/",
-      element: <Payment />,
-    },
-    {
       path: "/checkout-success",
       element: <Success />,
     },
   ]);
 
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
     getSettings(dispatch);
   }, [dispatch]);
+
+  useEffect(() => {
+    getCart(dispatch, user?._id);
+  }, [dispatch, user?._id]);
+
+  const createOrUpdateCart = useCallback(async () => {
+    try {
+      const existingCart = await axios.get(`/carts/find/${user?._id}`);
+      if (existingCart.data !== null) {
+        await axios.patch(`/carts/${user?._id}`, {
+          products: cart.products,
+          quantity: cart.quantity,
+          totalPrice: cart.totalPrice,
+        });
+      } else {
+        await axios.post("/carts", {
+          userId: user?._id,
+          userName: user?.username,
+          products: cart.products,
+          quantity: cart.quantity,
+          totalPrice: cart.totalPrice,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [
+    cart.products,
+    user?._id,
+    cart.quantity,
+    cart.totalPrice,
+    user?.username,
+  ]);
+
+  useEffect(() => {
+    createOrUpdateCart();
+  }, [createOrUpdateCart]);
 
   return (
     <>

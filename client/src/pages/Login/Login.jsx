@@ -7,8 +7,6 @@ import "./Login.scss";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  console.log(email);
-  console.log(password);
 
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);

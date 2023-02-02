@@ -1,11 +1,9 @@
 import axios from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
-import "./Cart/Cart.scss";
 
-const Payment = ({ cart }) => {
+const PaymentButton = ({ cart }) => {
   const user = useSelector((state) => state.user.user);
-  console.log(user);
   const handleCheckout = () => {
     axios
       .post("/stripe/create-checkout-session", {
@@ -28,4 +26,4 @@ const Payment = ({ cart }) => {
   );
 };
 
-export default Payment;
+export default PaymentButton;
