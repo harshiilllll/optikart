@@ -220,10 +220,18 @@ const Navbar = () => {
                 : "link mob-nav-link expandable-menu"
             }
           >
-            <Link className="link" onClick={() => setIsOpen(false)}>
+            <Link
+              className="link"
+              to={`/products/eyeglasses`}
+              onClick={() => setIsOpen(false)}
+            >
               Eyeglasses
             </Link>
-            <Link className="link" onClick={() => setIsOpen(false)}>
+            <Link
+              className="link"
+              to={`/products/sunglasses`}
+              onClick={() => setIsOpen(false)}
+            >
               Sunglasses
             </Link>
           </div>
@@ -243,17 +251,29 @@ const Navbar = () => {
                 : "link mob-nav-link expandable-menu"
             }
           >
-            <Link className="link" onClick={() => setIsOpen(false)}>
+            <Link
+              className="link"
+              to={`/products/men`}
+              onClick={() => setIsOpen(false)}
+            >
               Men's
             </Link>
-            <Link className="link" onClick={() => setIsOpen(false)}>
+            <Link
+              className="link"
+              to={`/products/women`}
+              onClick={() => setIsOpen(false)}
+            >
               Women's
             </Link>
           </div>
           {user ? (
-            <button className="logout-btn">LOGOUT</button>
+            <Link to={`/`} onClick={() => dispatch(logout())}>
+              <button className="logout-btn">LOGOUT</button>
+            </Link>
           ) : (
-            <button className="logout-btn">LOGIN</button>
+            <Link to={`/login`} onClick={() => setIsOpen(false)}>
+              <button className="logout-btn">LOGIN</button>
+            </Link>
           )}
         </nav>
       </nav>
