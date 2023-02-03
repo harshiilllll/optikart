@@ -16,10 +16,12 @@ import { logout } from "../../redux/userRedux";
 import { useRef } from "react";
 
 const Navbar = () => {
+  const user = useSelector((state) => state.user.user);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpandedB, setIsExpandedB] = useState(false);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -225,6 +227,34 @@ const Navbar = () => {
               Sunglasses
             </Link>
           </div>
+          <div
+            className="link mob-nav-link expandable"
+            onClick={() => setIsExpandedB(!isExpandedB)}
+          >
+            For{" "}
+            <KeyboardArrowRight
+              className={isExpandedB ? "icon down" : "icon"}
+            />
+          </div>
+          <div
+            className={
+              isExpandedB
+                ? "link mob-nav-link expandable-menu isExpanded"
+                : "link mob-nav-link expandable-menu"
+            }
+          >
+            <Link className="link" onClick={() => setIsOpen(false)}>
+              Men's
+            </Link>
+            <Link className="link" onClick={() => setIsOpen(false)}>
+              Women's
+            </Link>
+          </div>
+          {user ? (
+            <button className="logout-btn">LOGOUT</button>
+          ) : (
+            <button className="logout-btn">LOGIN</button>
+          )}
         </nav>
       </nav>
     </>

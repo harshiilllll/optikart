@@ -280,20 +280,33 @@
     transform: translateY(-25px);
     transition: all 0.2s ease;
     z-index: -1;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 10px;
 
     .link {
       border-bottom: 1px solid black;
-      padding-bottom: 15px;
+      padding-bottom: 14px;
+
+      &:last-child {
+        border-bottom: none;
+      }
     }
 
     &.isExpanded {
       height: auto;
       transform: translateY(0px);
       z-index: 2;
+      display: flex;
     }
+  }
+
+  .logout-btn {
+    background-color: black;
+    color: white;
+    width: max-content;
+    padding: 5px 20px;
+    align-self: baseline;
   }
 }
 
