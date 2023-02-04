@@ -1,4 +1,15 @@
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -38,23 +49,18 @@ const Order = () => {
               #{order._id}
             </Typography>
           </Box>
-          <Box
-            display="flex"
-            flexDirection="column"
-            height="400px"
-            sx={{
-              bgcolor: colors.blueAccent[900],
-              borderRadius: "8px",
-              padding: "10px 10px",
-              boxShadow: "0 0 30px rgba(0,0,0,0.1)",
-            }}
-          >
-            <Box display="flex" alignItems="center">
-              <Typography variant="h4" sx={{ color: "black" }}>
-                Delivery Status:{" "}
-              </Typography>
+          <Box display="flex" flexDirection="column">
+            <Box
+              display="flex"
+              gap="10px"
+              p="10px 0px"
+              alignItems="center"
+              borderBottom="1px solid white"
+            >
+              <Typography variant="h4">Delivery Status: </Typography>
               <Box
                 backgroundColor={colors.greenAccent[500]}
+                color="white"
                 maxWidth="80px"
                 width="80px"
                 display="flex"
@@ -66,6 +72,74 @@ const Order = () => {
                 {order.delivery_status}
               </Box>
             </Box>
+            <Box
+              display="flex"
+              gap="10px"
+              p="10px 0px"
+              alignItems="center"
+              // borderBottom="1px solid white"
+            >
+              <Typography variant="h4">
+                <label style={{ width: "700px" }}>userId: </label>
+                <span style={{ color: colors.greenAccent[500] }}>
+                  {order.userId}
+                </span>{" "}
+                <br />
+                <label style={{ width: "700px" }}>customerId: </label>
+                <span style={{ color: colors.greenAccent[500] }}>
+                  {order.customerId}
+                </span>{" "}
+                <br />
+                <label style={{ width: "700px" }}>paymentIntentId: </label>
+                <span style={{ color: colors.greenAccent[500] }}>
+                  {order.paymentIntentId}
+                </span>{" "}
+                <br />
+              </Typography>
+            </Box>
+            <Box
+              display="flex"
+              gap="10px"
+              p="10px 0px"
+              alignItems="center"
+              borderBottom="1px solid white"
+              mt="20px"
+            >
+              <Typography variant="h4">Ordered Products:</Typography>
+            </Box>
+
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>ID</TableCell>
+                  <TableCell>Img</TableCell>
+                  <TableCell>Product</TableCell>
+                  <TableCell align="right">Color</TableCell>
+                  <TableCell align="right">Qty.</TableCell>
+                  <TableCell align="right">Price (INR)</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {order.products.map((product) => (
+                  <TableRow key={product._id}>
+                    <TableCell>{product._id}</TableCell>
+                    <TableCell>
+                      <Avatar
+                        sx={{ width: "100px" }}
+                        src={product.img[0]}
+                        variant="rounded"
+                      />
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                      {product.title}
+                    </TableCell>
+                    <TableCell align="right">{product.color}</TableCell>
+                    <TableCell align="right">{product.quantity}</TableCell>
+                    <TableCell align="right">{product.price}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </Box>
         </>
       )}

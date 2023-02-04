@@ -68,7 +68,7 @@ router.get("/:id", verify, async (req, res) => {
 //GET ALL
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
-    const orders = await Order.find();
+    const orders = await Order.find().sort({ createdAt: -1 });
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json(error);

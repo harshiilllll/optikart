@@ -84,13 +84,15 @@ const Orders = () => {
         if (params.row.delivery_status === "pending") {
           return (
             <Box
-              backgroundColor={colors.redAccent[500]}
+              backgroundColor={colors.redAccent[300]}
+              color={colors.redAccent[800]}
+              fontWeight="700"
               maxWidth="80px"
               width="80px"
               display="flex"
               justifyContent="center"
-              p="5px 10px"
-              borderRadius="4px"
+              p="5px 7px"
+              borderRadius="14px"
             >
               PENDING
             </Box>
@@ -98,13 +100,15 @@ const Orders = () => {
         } else if (params.row.delivery_status === "delivered") {
           return (
             <Box
-              backgroundColor={colors.greenAccent[500]}
+              backgroundColor={colors.greenAccent[200]}
+              color={colors.greenAccent[800]}
+              fontWeight="700"
               maxWidth="80px"
               width="80px"
               display="flex"
               justifyContent="center"
-              p="5px 10px"
-              borderRadius="4px"
+              p="5px 7px"
+              borderRadius="14px"
             >
               DELIVERED
             </Box>
@@ -112,12 +116,14 @@ const Orders = () => {
         } else if (params.row.delivery_status === "dispatched") {
           return (
             <Box
-              backgroundColor={colors.blueAccent[500]}
+              backgroundColor={colors.blueAccent[200]}
+              color={colors.blueAccent[800]}
+              fontWeight="700"
               maxWidth="80px"
               display="flex"
               justifyContent="center"
-              p="5px 10px"
-              borderRadius="4px"
+              p="5px 7px"
+              borderRadius="14px"
             >
               DISPATCHED
             </Box>
