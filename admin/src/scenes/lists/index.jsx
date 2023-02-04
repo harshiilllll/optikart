@@ -97,9 +97,18 @@ const Lists = () => {
 
   return (
     <Box m="20px">
-      <Header title="Lists" subtitle="List of Invoice Balances" />
+      <Box display="flex" justifyContent="space-between">
+        <Header title="Lists" subtitle="List of Invoice Balances" />
+        <Link to={`/create-list`} style={{ textDecoration: "none" }}>
+          <Button
+            variant="contained"
+            sx={{ bgcolor: colors.greenAccent[500], height: "40px" }}
+          >
+            CREATE LIST
+          </Button>
+        </Link>
+      </Box>
       <Box
-        m="40px 0 0 0"
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {

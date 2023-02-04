@@ -36,6 +36,11 @@ import {
   updateListStart,
   updateListSuccess,
 } from "./listRedux";
+import {
+  getOrdersFailure,
+  getOrdersStart,
+  getOrdersSuccess,
+} from "./ordersRedux";
 
 //Login
 export const login = async (dispatch, user) => {
@@ -225,5 +230,23 @@ export const deleteList = async (id, dispatch) => {
     dispatch(deleteListSuccess(id));
   } catch (error) {
     dispatch(deleteListFailure());
+  }
+};
+
+//Fetch orders
+export const getOrders = async (dispatch) => {
+  dispatch(getOrdersStart());
+  try {
+    const res = await axios.get("/orders", {
+      headers: {
+        token:
+          "Bearer " +
+          JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).user
+            .accessToken,
+      },
+    });
+    dispatch(getOrdersSuccess(res.data));
+  } catch (error) {
+    dispatch(getOrdersFailure());
   }
 };

@@ -14,17 +14,20 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import ordersRedux from "./ordersRedux";
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
+  blacklist: ["orders"],
 };
 const rootReducer = combineReducers({
   user: userReducer,
   products: productReducer,
   customers: customerRedux,
   lists: listRedux,
+  orders: ordersRedux,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

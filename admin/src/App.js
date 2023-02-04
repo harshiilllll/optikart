@@ -22,6 +22,8 @@ import ProductForm from "./scenes/productCreate";
 import Lists from "./scenes/lists";
 import List from "./scenes/list";
 import CreateList from "./scenes/listCreate";
+import Orders from "./scenes/orders/Orders";
+import Order from "./scenes/orders/Order";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -47,6 +49,8 @@ function App() {
                 <Route path="/lists" element={<Lists />} />
                 <Route path="/create-list" element={<CreateList />} />
                 <Route path="/list/:id" element={<List />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/order/:id" element={<Order />} />
                 <Route path="/form" element={<Form />} />
                 <Route path="/add-product" element={<ProductForm />} />
                 <Route path="/bar" element={<Bar />} />

@@ -222,7 +222,6 @@ const Product = () => {
           name="size"
           sx={{ gridColumn: "span 4" }}
           inputProps={{ style: { textTransform: "lowercase" } }}
-          required
           onChange={handleSize}
         />
         <input

@@ -1,16 +1,16 @@
-import { Avatar, Box, Button, useTheme, Typography } from "@mui/material";
+import { Box, Button, useTheme, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
 import { useEffect } from "react";
-import { deleteProduct, getProducts } from "../../redux/apiCalls";
+import { getOrders } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 import { format } from "timeago.js";
 
-const Products = () => {
+const Orders = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -18,73 +18,116 @@ const Products = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getProducts(dispatch);
+    getOrders(dispatch);
   }, [dispatch]);
-  const products = useSelector((state) => state.products.products);
+  const orders = useSelector((state) => state.orders.orders);
 
   //Delete product
-  const handleDelete = (id) => {
-    if (window.confirm("Are your sure you want to delete?")) {
-      deleteProduct(id, dispatch);
-    } else {
-      return;
-    }
-  };
+  //   const handleDelete = (id) => {
+  //     if (window.confirm("Are your sure you want to delete?")) {
+  //       deleteProduct(id, dispatch);
+  //     } else {
+  //       return;
+  //     }
+  //   };
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 180 },
+    { field: "_id", headerName: "Order ID", width: 180 },
     {
-      field: "img",
-      headerName: "Img",
-      width: 30,
+      field: "shipping.email",
+      headerName: "Customer Email",
+      flex: 1,
+      cellClassName: "name-column--cell",
+      renderCell: (params) => {
+        return (
+          <div title={params.row.shipping.name}>
+            {params.row.shipping.email}
+          </div>
+        );
+      },
+    },
+    {
+      field: "total_products",
+      headerName: "Products",
+      width: 100,
       renderCell: (params) => {
         return (
           <>
-            <Avatar
-              sx={{
-                bgcolor: colors.greenAccent[300],
-                objectFit: "contain",
-                height: 28,
-                marginRight: 1,
-              }}
-              alt={params.row.title}
-              src={params.row.img[0]}
-              variant="rounded"
-            />
+            <div>{params.row.products.length}</div>
           </>
         );
       },
     },
     {
-      field: "title",
-      headerName: "Name",
-      flex: 1,
-      cellClassName: "name-column--cell",
-      renderCell: (params) => {
-        return <div title={params.row.title}>{params.row.title}</div>;
-      },
-    },
-    {
-      field: "price",
-      headerName: "Price",
+      field: "total",
+      headerName: "Total amt.",
       type: "number",
       headerAlign: "left",
       align: "left",
     },
     {
-      field: "inStock",
-      headerName: "In Stock",
+      field: "payment_status",
+      headerName: "Payment Status",
       flex: 1,
       renderCell: (params) =>
-        params.row.inStock ? (
+        params.row.payment_status === "paid" ? (
           <DoneRoundedIcon sx={{ color: colors.greenAccent[300] }} />
         ) : (
           <CloseRoundedIcon sx={{ color: colors.redAccent[500] }} />
         ),
     },
     {
+      field: "delivery_status",
+      headerName: "Delivery Status",
+      flex: 1,
+      renderCell: (params) => {
+        if (params.row.delivery_status === "pending") {
+          return (
+            <Box
+              backgroundColor={colors.redAccent[500]}
+              maxWidth="80px"
+              width="80px"
+              display="flex"
+              justifyContent="center"
+              p="5px 10px"
+              borderRadius="4px"
+            >
+              PENDING
+            </Box>
+          );
+        } else if (params.row.delivery_status === "delivered") {
+          return (
+            <Box
+              backgroundColor={colors.greenAccent[500]}
+              maxWidth="80px"
+              width="80px"
+              display="flex"
+              justifyContent="center"
+              p="5px 10px"
+              borderRadius="4px"
+            >
+              DELIVERED
+            </Box>
+          );
+        } else if (params.row.delivery_status === "dispatched") {
+          return (
+            <Box
+              backgroundColor={colors.blueAccent[500]}
+              maxWidth="80px"
+              display="flex"
+              justifyContent="center"
+              p="5px 10px"
+              borderRadius="4px"
+            >
+              DISPATCHED
+            </Box>
+          );
+        }
+      },
+    },
+    {
       field: "createdAt",
-      headerName: "Created",
+      headerName: "Order Recieved",
       flex: 1,
       renderCell: (params) => (
         <Typography color={colors.greenAccent[500]}>
@@ -108,25 +151,25 @@ const Products = () => {
         return (
           <Box display="flex" gap="10px">
             <Link
-              to={`/product/${params.row._id}`}
+              to={`/order/${params.row._id}`}
               style={{ textDecoration: "none" }}
             >
               <Button
                 size="small"
-                sx={{ padding: "5px", bgcolor: colors.primary[500] }}
+                sx={{ padding: "5px", bgcolor: colors.blueAccent[400] }}
                 variant="contained"
               >
-                Edit
+                VIEW
               </Button>
             </Link>
-            <Button
+            {/* <Button
               size="small"
               sx={buttonSX}
               variant="contained"
               onClick={() => handleDelete(params.row._id)}
             >
               DELETE
-            </Button>
+            </Button> */}
           </Box>
         );
       },
@@ -135,18 +178,9 @@ const Products = () => {
 
   return (
     <Box m="20px">
-      <Box display="flex" justifyContent="space-between">
-        <Header title="PRODUCTS" subtitle="Managing the products" />
-        <Link to={`/add-product`} style={{ textDecoration: "none" }}>
-          <Button
-            variant="contained"
-            sx={{ bgcolor: colors.greenAccent[500], height: "40px" }}
-          >
-            ADD PRODUCT
-          </Button>
-        </Link>
-      </Box>
+      <Header title="ORDERS" subtitle="Managing the orders" />
       <Box
+        m="40px 0 0 0"
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {
@@ -179,21 +213,14 @@ const Products = () => {
       >
         <DataGrid
           checkboxSelection
-          rows={products}
+          rows={orders}
           getRowId={(row) => row._id}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
-          onSelectionModelChange={(ids) => {
-            const selectedIDs = new Set(ids);
-            const selectedRowData = products.filter((product) =>
-              selectedIDs.has(product._id.toString())
-            );
-            console.log(selectedRowData);
-          }}
         />
       </Box>
     </Box>
   );
 };
 
-export default Products;
+export default Orders;

@@ -15,7 +15,8 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import { AddBoxOutlined, Inventory2Outlined } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 
@@ -137,6 +138,13 @@ const Sidebar = () => {
               Data
             </Typography>
             <Item
+              title="Orders"
+              to="/orders"
+              icon={<LocalShippingIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Products"
               to="/products"
               icon={<Inventory2Outlined />}
@@ -157,7 +165,6 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-
             <Typography
               variant="h6"
               color={colors.grey[300]}
