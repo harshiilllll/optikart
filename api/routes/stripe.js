@@ -9,20 +9,9 @@ const Stripe = require("stripe");
 const stripe = Stripe(process.env.STRIPE_KEY);
 
 router.post("/create-checkout-session", async (req, res) => {
-  // const cartArray = req.body.cart.products.map((product) => ({
-  //   _id: product._id,
-  //   title: product.title,
-  //   price: product.price,
-  //   size: product.size,
-  //   color: product.color,
-  //   quantity: product.quantity,
-  // }));
-
   const customer = await stripe.customers.create({
-    //Have to fix maximum characters in cart
     metadata: {
       userId: req.body.userId.toString(),
-      // cart: JSON.stringify(cartArray),
     },
   });
   const line_items = req.body.cart.products.map((item) => {
@@ -68,13 +57,12 @@ router.post("/create-checkout-session", async (req, res) => {
   res.send({ url: session.url });
 });
 
-const createOrder = async (customer, data) => {
-  // const products = JSON.parse(customer.metadata.cart);
+const createOrder = async (customer, data, lineItems) => {
   const newOrder = new Order({
     userId: customer.metadata.userId,
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
-    // products: products,
+    products: lineItems,
     subtotal: data.amount_subtotal / 100,
     total: data.amount_total / 100,
     shipping: data.customer_details,
@@ -125,7 +113,15 @@ router.post(
       stripe.customers
         .retrieve(data.customer)
         .then((customer) => {
-          createOrder(customer, data);
+          stripe.checkout.sessions.listLineItems(
+            data.id,
+            {},
+            function (err, lineItems) {
+              // asynchronously called
+              console.log(lineItems);
+              createOrder(customer, data, lineItems);
+            }
+          );
         })
         .catch((err) => console.log(err));
     }
