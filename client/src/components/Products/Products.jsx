@@ -7,6 +7,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 const Products = ({ category, filters, sort, clearFilters }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const search = useLocation().search;
   useEffect(() => {
     const getProducts = async () => {
@@ -17,6 +18,7 @@ const Products = ({ category, filters, sort, clearFilters }) => {
         }
         const res = await axios.get(url);
         setProducts(res.data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -59,7 +61,8 @@ const Products = ({ category, filters, sort, clearFilters }) => {
 
   return (
     <div className="products">
-      {filteredProducts.length === 0 && (
+      {loading === true && <span>LOADING...</span>}
+      {loading === false && filteredProducts.length === 0 && (
         <>
           <h1>No products at the moment.</h1>
           <Link

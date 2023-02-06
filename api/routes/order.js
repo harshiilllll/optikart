@@ -25,7 +25,7 @@ router.put("/:userId", async (req, res) => {
       {
         $set: req.body,
       },
-      { sort: { createdAt: -1 }, new: true }
+      { sort: { _id: -1 }, new: true }
     );
     res.status(200).json(updatedOrder);
   } catch (err) {

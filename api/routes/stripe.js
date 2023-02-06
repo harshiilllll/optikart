@@ -62,11 +62,11 @@ const createOrder = async (customer, data, lineItems) => {
     userId: customer.metadata.userId,
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
-    products: lineItems,
-    subtotal: data.amount_subtotal / 100,
-    total: data.amount_total / 100,
+    subtotal: data.amount_subtotal,
+    total: data.amount_total,
     shipping: data.customer_details,
     payment_status: data.payment_status,
+    products: lineItems.data,
   });
 
   try {
@@ -118,7 +118,7 @@ router.post(
             {},
             function (err, lineItems) {
               // asynchronously called
-              console.log(lineItems);
+              // console.log(lineItems);
               createOrder(customer, data, lineItems);
             }
           );

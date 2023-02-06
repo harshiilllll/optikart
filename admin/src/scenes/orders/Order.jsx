@@ -39,6 +39,17 @@ const Order = () => {
     getOrder();
   }, [id]);
 
+  const [action, setAction] = useState(null);
+  const handleChange = async (e) => {
+    const value = e.target.value;
+    setAction({ ...action, [e.target.name]: value });
+
+    // await axios.put("orders/"+ id {
+
+    // })
+  };
+  console.log(action);
+
   return (
     <Box m="20px">
       {order && (
@@ -46,8 +57,13 @@ const Order = () => {
           <Box display="flex" gap="10px">
             <Header title={`Order Number`} />
             <Typography variant="h2" sx={{ color: colors.greenAccent[500] }}>
-              #{order._id}
+              #{order?._id}
             </Typography>
+            <select name="delivery_status" onChange={handleChange}>
+              <option value="pending">pending</option>
+              <option value="dispatched">dispatched</option>
+              <option value="delivered">delivered</option>
+            </select>
           </Box>
           <Box display="flex" flexDirection="column">
             <Box
@@ -69,7 +85,7 @@ const Order = () => {
                 borderRadius="4px"
                 textTransform="uppercase"
               >
-                {order.delivery_status}
+                {order?.delivery_status}
               </Box>
             </Box>
             <Box
@@ -82,17 +98,17 @@ const Order = () => {
               <Typography variant="h4">
                 <label style={{ width: "700px" }}>userId: </label>
                 <span style={{ color: colors.greenAccent[500] }}>
-                  {order.userId}
+                  {order?.userId}
                 </span>{" "}
                 <br />
                 <label style={{ width: "700px" }}>customerId: </label>
                 <span style={{ color: colors.greenAccent[500] }}>
-                  {order.customerId}
+                  {order?.customerId}
                 </span>{" "}
                 <br />
                 <label style={{ width: "700px" }}>paymentIntentId: </label>
                 <span style={{ color: colors.greenAccent[500] }}>
-                  {order.paymentIntentId}
+                  {order?.paymentIntentId}
                 </span>{" "}
                 <br />
               </Typography>
@@ -120,22 +136,26 @@ const Order = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {order.products.map((product) => (
-                  <TableRow key={product._id}>
-                    <TableCell>{product._id}</TableCell>
-                    <TableCell>
+                {order?.products.map((product) => (
+                  <TableRow key={product.id}>
+                    <TableCell>{product.id}</TableCell>
+                    {/* <TableCell>
                       <Avatar
                         sx={{ width: "100px" }}
                         src={product.img[0]}
                         variant="rounded"
                       />
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell component="th" scope="row">
-                      {product.title}
+                      {product.description}
                     </TableCell>
-                    <TableCell align="right">{product.color}</TableCell>
-                    <TableCell align="right">{product.quantity}</TableCell>
-                    <TableCell align="right">{product.price}</TableCell>
+                    {order.product_info.map((info) => (
+                      <>
+                        <TableCell align="right">{info.color}</TableCell>
+                        <TableCell align="right">{info.quantity}</TableCell>
+                        <TableCell align="right">{info.price}</TableCell>
+                      </>
+                    ))}
                   </TableRow>
                 ))}
               </TableBody>

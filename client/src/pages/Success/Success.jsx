@@ -6,28 +6,28 @@ import "./Success.scss";
 
 const Success = () => {
   // const [orderedProducts, setOrderedProducts] = useState([]);
-  // const userId = useSelector((state) => state.user.user._id);
-  // const cart = useSelector((state) => state.cart);
+  const userId = useSelector((state) => state.user.user._id);
+  const cart = useSelector((state) => state.cart);
 
-  // useEffect(() => {
-  //   const addProductsInOrder = async () => {
-  //     try {
-  //       await axios.put("/orders/" + userId, {
-  //         products: cart.products.map((product) => ({
-  //           productId: product._id,
-  //           title: product.title,
-  //           price: product.price,
-  //           size: product.size,
-  //           color: product.color,
-  //           quantity: product.quantity,
-  //           img: product.img,
-  //           desc: product.desc,
-  //         })),
-  //       });
-  //     } catch {}
-  //   };
-  //   addProductsInOrder();
-  // }, [cart.products, userId]);
+  useEffect(() => {
+    const addProductsInOrder = async () => {
+      try {
+        await axios.put("/orders/" + userId, {
+          product_info: cart.products.map((product) => ({
+            productId: product._id,
+            price: product.price,
+            size: product.size,
+            color: product.color,
+            quantity: product.quantity,
+            img: product.img,
+            desc: product.desc,
+            title: product.title,
+          })),
+        });
+      } catch {}
+    };
+    addProductsInOrder();
+  }, [cart.products, userId]);
 
   // useEffect(() => {
   //   const getOrederdProducts = async () => {
