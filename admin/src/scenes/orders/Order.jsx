@@ -124,42 +124,55 @@ const Order = () => {
               <Typography variant="h4">Ordered Products:</Typography>
             </Box>
 
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell>Img</TableCell>
-                  <TableCell>Product</TableCell>
-                  <TableCell align="right">Color</TableCell>
-                  <TableCell align="right">Qty.</TableCell>
-                  <TableCell align="right">Price (INR)</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {order?.products.map((product) => (
-                  <TableRow key={product.id}>
-                    <TableCell>{product.id}</TableCell>
-                    {/* <TableCell>
-                      <Avatar
-                        sx={{ width: "100px" }}
-                        src={product.img[0]}
-                        variant="rounded"
-                      />
-                    </TableCell> */}
-                    <TableCell component="th" scope="row">
-                      {product.description}
-                    </TableCell>
-                    {order.product_info.map((info) => (
-                      <>
-                        <TableCell align="right">{info.color}</TableCell>
-                        <TableCell align="right">{info.quantity}</TableCell>
-                        <TableCell align="right">{info.price}</TableCell>
-                      </>
-                    ))}
+            <Box display="flex">
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>ID</TableCell>
+                    <TableCell>Image</TableCell>
+                    <TableCell>Size</TableCell>
+                    <TableCell>Color</TableCell>
+                    <TableCell align="right">Qty.</TableCell>
+                    <TableCell align="right">Price (INR)</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHead>
+                <TableBody>
+                  {order?.product_info.map((info) => (
+                    <TableRow key={info.productId}>
+                      <TableCell>{info.productId}</TableCell>
+                      <TableCell><Avatar variant="rounded" sx={{width: "100px"}} src={info.img[0]} /></TableCell>
+                      <TableCell component="th" scope="row">
+                        {info.size}
+                      </TableCell>
+                      <TableCell>{info.color}</TableCell>
+                      <TableCell align="right">{info.quantity}</TableCell>
+                      <TableCell align="right">{info.price}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Product</TableCell>
+                    <TableCell align="right">Total (INR)</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {order?.products.map((product) => (
+                    <TableRow key={product.id}>
+                      <TableCell component="th" scope="row">
+                        {product.description}
+                      </TableCell>
+                      <TableCell align="right">
+                        {product.amount_total / 100}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Box>
           </Box>
         </>
       )}
