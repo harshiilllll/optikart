@@ -9,17 +9,22 @@ import { Link } from "react-router-dom";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 import { format } from "timeago.js";
+import { useState } from "react";
 
 const Products = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [loading, setLoading] = useState(true);
 
   //Fetch products
   const dispatch = useDispatch();
 
   useEffect(() => {
     getProducts(dispatch);
+    setLoading(false);
   }, [dispatch]);
+
+  console.log(loading);
   const products = useSelector((state) => state.products.products);
 
   //Delete product
