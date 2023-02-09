@@ -60,9 +60,9 @@ router.get("/", async (req, res) => {
     } else if (queryCategory) {
       products = await Product.find({
         categories: { $eq: queryCategory },
-      });
+      }).sort({ _id: -1 });
     } else {
-      products = await Product.find();
+      products = await Product.find().sort({ _id: -1 });
     }
     res.status(200).json(products);
   } catch (error) {

@@ -3,13 +3,16 @@ import { AddToPhotosOutlined } from "@mui/icons-material";
 import {
   Box,
   Button,
+  Checkbox,
   FormControl,
+  FormControlLabel,
+  FormGroup,
   InputLabel,
   MenuItem,
   Select,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import { tokens } from "../../theme";
 import {
@@ -23,6 +26,7 @@ import { addProducts } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const ProductForm = () => {
   const theme = useTheme();
@@ -46,10 +50,6 @@ const ProductForm = () => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
-  };
-
-  const handleCat = (e) => {
-    setCat(e.target.value.split(","));
   };
 
   const handleColor = (e) => {
@@ -125,6 +125,27 @@ const ProductForm = () => {
     setInputs({});
   };
 
+  const handleCatCheck = (e) => {
+    const value = e.target.value;
+    if (e.target.checked) {
+      setCat([...cat, value]);
+    } else {
+      setCat(cat.filter((e) => e !== value));
+    }
+  };
+
+  console.log(cat);
+
+  const [catValue, setCatValue] = useState([]);
+
+  useEffect(() => {
+    const getCats = async () => {
+      const res = await axios.get("/categories");
+      setCatValue(res.data);
+    };
+    getCats();
+  }, []);
+
   return (
     <form style={{ margin: "20px" }} onSubmit={handleSubmit}>
       <Header title={`ADD PRODUCT`} subtitle="Create New Product" />
@@ -177,18 +198,6 @@ const ProductForm = () => {
           fullWidth
           variant="filled"
           type="text"
-          label="Categories"
-          placeholder="Seperate categories by comma ,"
-          name="categories"
-          sx={{ gridColumn: "span 4" }}
-          inputProps={{ style: { textTransform: "lowercase" } }}
-          required
-          onChange={handleCat}
-        />
-        <TextField
-          fullWidth
-          variant="filled"
-          type="text"
           label="Colors"
           placeholder="Seperate colors by comma ,"
           name="color"
@@ -197,6 +206,23 @@ const ProductForm = () => {
           required
           onChange={handleColor}
         />
+        <Box sx={{ gridColumn: "span 4" }}>
+          Select Categories
+          <br />
+          {catValue.map((cat) => (
+            <FormControlLabel
+              control={
+                <Checkbox
+                  onChange={handleCatCheck}
+                  value={cat.cat}
+                  sx={{ "&.Mui-checked": { color: colors.blueAccent[200] } }}
+                />
+              }
+              label={cat.cat}
+              sx={{ textTransform: "capitalize" }}
+            />
+          ))}
+        </Box>
         <TextField
           fullWidth
           variant="filled"
@@ -209,6 +235,7 @@ const ProductForm = () => {
           required
           onChange={handleSize}
         />
+        
         <input
           type="file"
           name="img"
@@ -229,7 +256,7 @@ const ProductForm = () => {
             justifyContent: "center",
             alignItems: "center",
             gap: "5px",
-            minWidth: "100px"
+            minWidth: "100px",
           }}
         >
           <AddToPhotosOutlined />

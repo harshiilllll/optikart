@@ -24,6 +24,7 @@ import List from "./scenes/list";
 import CreateList from "./scenes/listCreate";
 import Orders from "./scenes/orders/Orders";
 import Order from "./scenes/orders/Order";
+import Categories from "./scenes/categories";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -59,6 +60,7 @@ function App() {
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/geography" element={<Geography />} />
+                <Route path="/categories" element={<Categories />} />
               </Routes>
             </main>
           </div>

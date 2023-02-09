@@ -1,28 +1,69 @@
 // import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 import "./Register.scss";
 
 const Register = () => {
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
-  // console.log(username);
-  // console.log(password);
+  const [inputs, setInputs] = useState({});
+
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  console.log(inputs);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios.post("/auth/register", inputs);
+  };
 
   return (
     <div className="register">
-      <form className="form" onSubmit={(e) => e.preventDefault()}>
+      <form className="form" onSubmit={handleSubmit}>
         <h1>Create Account</h1>
         <div className="inputs">
           <label>First Name</label>
-          <input className="input" type="text" autoComplete="off" />
+          <input
+            name="firstname"
+            className="input"
+            type="text"
+            autoComplete="off"
+            onChange={handleChange}
+          />
           <label>Last Name</label>
-          <input className="input" type="text" autoComplete="off" />
+          <input
+            name="lastname"
+            className="input"
+            type="text"
+            autoComplete="off"
+            onChange={handleChange}
+          />
           <label>Username</label>
-          <input className="input" type="text" autoComplete="off" />
+          <input
+            name="username"
+            className="input"
+            type="text"
+            autoComplete="off"
+            onChange={handleChange}
+          />
           <label>Email</label>
-          <input className="input" type="email" autoComplete="off" />
+          <input
+            name="email"
+            className="input"
+            type="email"
+            autoComplete="off"
+            onChange={handleChange}
+          />
           <label>Password</label>
-          <input className="input" type="password" autoComplete="off" />
+          <input
+            name="password"
+            className="input"
+            type="password"
+            autoComplete="off"
+            onChange={handleChange}
+          />
         </div>
         <input className="button" type="submit" value="CREATE" />
       </form>
