@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Button,
   Table,
   TableBody,
   TableCell,
@@ -9,13 +8,14 @@ import {
   TableRow,
   Typography,
   useTheme,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import Header from "../../components/Header";
+import { useParams } from "react-router-dom";
 import { tokens } from "../../theme";
+import Button from "@mui/material/Button";
 
 const Order = () => {
   const theme = useTheme();
@@ -50,20 +50,37 @@ const Order = () => {
   };
   console.log(action);
 
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box m="20px">
       {order && (
         <>
-          <Box display="flex" gap="10px">
-            <Header title={`Order Number`} />
-            <Typography variant="h2" sx={{ color: colors.greenAccent[500] }}>
-              #{order?._id}
-            </Typography>
-            <select name="delivery_status" onChange={handleChange}>
-              <option value="pending">pending</option>
-              <option value="dispatched">dispatched</option>
-              <option value="delivered">delivered</option>
-            </select>
+          <Box display="flex" gap="10px" alignItems="center">
+            <Box m="0 0 20px 0">
+              <Typography variant="h1" textTransform="uppercase">
+                Order Number
+              </Typography>
+              <Typography
+                variant="h4"
+                sx={{
+                  bgcolor: colors.grey[900],
+                  borderRadius: "8px",
+                  padding: "2px 4px",
+                  color: colors.greenAccent[500],
+                  height: "fit-content",
+                }}
+              >
+                #{order?._id}
+              </Typography>
+            </Box>
           </Box>
           <Box display="flex" flexDirection="column">
             <Box
@@ -74,19 +91,30 @@ const Order = () => {
               borderBottom="1px solid white"
             >
               <Typography variant="h4">Delivery Status: </Typography>
-              <Box
-                backgroundColor={colors.greenAccent[500]}
-                color="white"
-                maxWidth="80px"
-                width="80px"
-                display="flex"
-                justifyContent="center"
-                p="4px 10px"
-                borderRadius="4px"
-                textTransform="uppercase"
+              <Button
+                id="basic-button"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+                variant="contained"
+                sx={{bgcolor: colors.greenAccent[700]}}
               >
-                {order?.delivery_status}
-              </Box>
+                Delivery Status
+              </Button>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>Logout</MenuItem>
+              </Menu>
             </Box>
             <Box
               display="flex"
@@ -109,6 +137,11 @@ const Order = () => {
                 <label style={{ width: "700px" }}>paymentIntentId: </label>
                 <span style={{ color: colors.greenAccent[500] }}>
                   {order?.paymentIntentId}
+                </span>{" "}
+                <br />
+                <label style={{ width: "700px" }}>Customer Name: </label>
+                <span style={{ color: colors.greenAccent[500] }}>
+                  {order?.shipping.name}
                 </span>{" "}
                 <br />
               </Typography>
@@ -140,7 +173,13 @@ const Order = () => {
                   {order?.product_info.map((info) => (
                     <TableRow key={info.productId}>
                       <TableCell>{info.productId}</TableCell>
-                      <TableCell><Avatar variant="rounded" sx={{width: "100px"}} src={info.img[0]} /></TableCell>
+                      <TableCell>
+                        <Avatar
+                          variant="rounded"
+                          sx={{ width: "100px" }}
+                          src={info.img[0]}
+                        />
+                      </TableCell>
                       <TableCell component="th" scope="row">
                         {info.size}
                       </TableCell>

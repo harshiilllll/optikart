@@ -7,7 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useEffect, useState } from "react";
 import { addProduct } from "../../redux/cartRedux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FavoriteBorderRounded } from "@mui/icons-material";
@@ -18,7 +18,6 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState(item.color[0]);
   const [size, setSize] = useState(item.size[0]);
-
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -39,6 +38,8 @@ const Product = () => {
     dispatch(addProduct({ ...item, quantity, color, size }));
     toast.success("Added to cart successfully!");
   };
+
+  const user = useSelector((state) => state.user.user);
 
   return (
     <>
@@ -93,7 +94,7 @@ const Product = () => {
             <AddIcon onClick={handleQuantityAdd} className="icon" />
           </div>
           <div className="buttons">
-            <button className="cart-btn" onClick={handleClick}>
+            <button className="cart-btn" disabled={user} onClick={handleClick}>
               <ShoppingCartOutlinedIcon />
               Add to cart
             </button>

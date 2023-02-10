@@ -26,7 +26,6 @@ const Login = () => {
           <input
             className="input"
             type="email"
-            autoComplete="off"
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -36,7 +35,6 @@ const Login = () => {
           <input
             className="input"
             type="password"
-            autoComplete="off"
             onChange={(e) => {
               setPassword(e.target.value);
             }}

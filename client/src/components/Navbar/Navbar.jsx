@@ -128,13 +128,13 @@ const Navbar = () => {
             </li>
           </ul>
           <div className="center">
-            <img className="logo-img" src={LOGO} alt="" />
             <button
               className={isOpen ? "isActive hamburger" : "hamburger"}
               onClick={() => setIsOpen(!isOpen)}
             >
               <div className="bar"></div>
             </button>
+            <img className="logo-img" src={LOGO} alt="" />
             <Link to="/" className="logo">
               {brandName}
             </Link>
@@ -241,6 +241,13 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
             >
               Sunglasses
+            </Link>
+            <Link
+              className="link"
+              to={`/products`}
+              onClick={() => setIsOpen(false)}
+            >
+              All products
             </Link>
           </div>
           <div
