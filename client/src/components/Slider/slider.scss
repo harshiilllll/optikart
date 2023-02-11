@@ -36,6 +36,7 @@
         object-fit: cover;
         object-position: top;
         user-select: none;
+        pointer-events: none;
 
         @include tablet {
           object-fit: cover;

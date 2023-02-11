@@ -19,6 +19,7 @@ import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import { AddBoxOutlined, Inventory2Outlined } from "@mui/icons-material";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -44,6 +45,13 @@ const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
 
+  useEffect(() => {
+    const elements = document.getElementsByClassName("content");
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.marginLeft = isCollapsed ? "80px" : "280px";
+    }
+  }, [isCollapsed]);
+
   const user = useSelector((state) => state.user.user);
 
   return (
@@ -66,7 +74,7 @@ const Sidebar = () => {
         },
       }}
     >
-      <ProSidebar collapsed={isCollapsed}>
+      <ProSidebar collapsed={isCollapsed} style={{ position: "fixed" }}>
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem

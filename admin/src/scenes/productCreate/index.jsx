@@ -4,13 +4,10 @@ import {
   Box,
   Button,
   Checkbox,
-  FormControl,
   FormControlLabel,
-  FormGroup,
   InputLabel,
-  MenuItem,
-  Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import Header from "../../components/Header";
@@ -134,8 +131,6 @@ const ProductForm = () => {
     }
   };
 
-  console.log(cat);
-
   const [catValue, setCatValue] = useState([]);
 
   useEffect(() => {
@@ -206,11 +201,25 @@ const ProductForm = () => {
           required
           onChange={handleColor}
         />
-        <Box sx={{ gridColumn: "span 4" }}>
-          Select Categories
+        <Box
+          sx={{
+            gridColumn: "span 4",
+            display: "flex",
+            flexDirection: "column",
+            maxHeight: "200px",
+            overflowY: "auto",
+            bgcolor: colors.blueAccent[900],
+            borderRadius: "4px",
+            padding: "20px",
+          }}
+        >
+          <Typography variant="h5" sx={{ color: "#777" }}>
+            Select Categories
+          </Typography>
           <br />
           {catValue.map((cat) => (
             <FormControlLabel
+              key={cat._id}
               control={
                 <Checkbox
                   onChange={handleCatCheck}
@@ -235,7 +244,7 @@ const ProductForm = () => {
           required
           onChange={handleSize}
         />
-        
+
         <input
           type="file"
           name="img"
