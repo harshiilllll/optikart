@@ -101,11 +101,19 @@ const Navbar = () => {
               <KeyboardArrowDown className="icon" />
               <div className="options" onClick={() => dispatch(logout())}>
                 {user ? (
-                  <Link to={`/`} onClick={() => dispatch(logout())}>
+                  <Link
+                    to={`/`}
+                    className="link"
+                    onClick={() => dispatch(logout())}
+                  >
                     LOGOUT
                   </Link>
                 ) : (
-                  <Link to={`/login`} onClick={() => setIsOpen(false)}>
+                  <Link
+                    to={`/login`}
+                    className="link"
+                    onClick={() => setIsOpen(false)}
+                  >
                     LOGIN
                   </Link>
                 )}

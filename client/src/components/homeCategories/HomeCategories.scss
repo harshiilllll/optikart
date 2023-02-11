@@ -6,6 +6,10 @@
   gap: 5px;
   overflow-x: auto;
 
+  &::-webkit-scrollbar{
+    display: none;
+  }
+
   @include tablet {
     padding: 10px;
   }

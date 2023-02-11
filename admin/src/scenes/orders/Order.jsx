@@ -39,24 +39,33 @@ const Order = () => {
     getOrder();
   }, [id]);
 
-  const [action, setAction] = useState(null);
-  const handleChange = async (e) => {
-    const value = e.target.value;
-    setAction({ ...action, [e.target.name]: value });
-
-    // await axios.put("orders/"+ id {
-
-    // })
-  };
-  console.log(action);
+  const [selectedOption, setSelectedOption] = useState("");
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (e) => {
+    setSelectedOption(e.currentTarget.textContent.toLowerCase());
     setAnchorEl(null);
+  };
+
+  const handleSave = async () => {
+    if (selectedOption === "") return;
+
+    await axios.put(
+      "/orders/" + id,
+      { delivery_status: selectedOption },
+      {
+        headers: {
+          token:
+            "Bearer " +
+            JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
+              .user.accessToken,
+        },
+      }
+    );
   };
 
   return (
@@ -98,9 +107,9 @@ const Order = () => {
                 aria-expanded={open ? "true" : undefined}
                 onClick={handleClick}
                 variant="contained"
-                sx={{bgcolor: colors.greenAccent[700]}}
+                sx={{ bgcolor: colors.greenAccent[700] }}
               >
-                Delivery Status
+                {selectedOption || order.delivery_status}
               </Button>
               <Menu
                 id="basic-menu"
@@ -111,10 +120,20 @@ const Order = () => {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={handleClose}>DISPATCHED</MenuItem>
+                <MenuItem onClick={handleClose}>DELIVERED</MenuItem>
+                <MenuItem onClick={handleClose}>PENDING</MenuItem>
               </Menu>
+              <Button
+                onClick={handleSave}
+                variant="outlined"
+                sx={{
+                  color: colors.greenAccent[500],
+                  borderColor: colors.greenAccent[500],
+                }}
+              >
+                SAVE
+              </Button>
             </Box>
             <Box
               display="flex"

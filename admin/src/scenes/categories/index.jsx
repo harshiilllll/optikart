@@ -22,7 +22,9 @@ const Categories = () => {
 
   const handleChange = (e) => {
     setAddCat((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
+      const value =
+        e.target.name === "cat" ? e.target.value.toLowerCase() : e.target.value;
+      return { ...prev, [e.target.name]: value };
     });
   };
 
@@ -46,7 +48,7 @@ const Categories = () => {
             .accessToken,
       },
     });
-    await cats.filter((item) => item._id !== id);
+    cats.filter((item) => item._id !== id);
   };
 
   console.log(addCat);

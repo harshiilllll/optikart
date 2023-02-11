@@ -64,6 +64,13 @@ const Orders = () => {
       type: "number",
       headerAlign: "left",
       align: "left",
+      renderCell: (params) => {
+        return (
+          <>
+            <div>{params.row.total / 100}</div>
+          </>
+        );
+      },
     },
     {
       field: "payment_status",

@@ -18,10 +18,10 @@ router.post("/", verify, async (req, res) => {
 });
 
 //UPDATE Order
-router.put("/:userId", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
-    const updatedOrder = await Order.findOneAndUpdate(
-      { userId: req.params.userId },
+    const updatedOrder = await Order.findByIdAndUpdate(
+      req.params.id,
       {
         $set: req.body,
       },

@@ -31,7 +31,14 @@ const ProductList = () => {
 
   return (
     <>
-      <TopBanner />
+      {/* <TopBanner /> */}
+      <div style={{ width: "100%", height: "40vh" }}>
+        <img
+          style={{ width: "100%", objectFit: "cover", maxHeight: "40vh" }}
+          src={`https://source.unsplash.com/1720x400/?${category}-glasses`}
+          alt=""
+        />
+      </div>
       <div className="productList">
         <h1 className="heading">{category ? category : "All Glasses"}</h1>
         <div className="filterContainer">

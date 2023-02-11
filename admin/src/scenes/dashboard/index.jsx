@@ -51,7 +51,6 @@ const Dashboard = () => {
     };
     getOrders();
   }, []);
-  console.log(orders);
 
   return (
     <Box m="20px">

@@ -4,15 +4,15 @@ import './Loader.scss'
 const Loader = () => {
   return (
     <div className="loader">
-      <svg class="circular">
+      <svg className="circular">
         <circle
-          class="path"
+          className="path"
           cx="50"
           cy="50"
           r="20"
           fill="none"
-          stroke-width="3"
-          stroke-miterlimit="10"
+          strokeWidth="3"
+          strokeMiterlimit="10"
         />
       </svg>
     </div>

@@ -34,9 +34,7 @@ const Product = () => {
   };
 
   const handleClick = () => {
-    //update cart
     dispatch(addProduct({ ...item, quantity, color, size }));
-    toast.success("Added to cart successfully!");
   };
 
   const user = useSelector((state) => state.user.user);
@@ -94,7 +92,7 @@ const Product = () => {
             <AddIcon onClick={handleQuantityAdd} className="icon" />
           </div>
           <div className="buttons">
-            <button className="cart-btn" disabled={user} onClick={handleClick}>
+            <button className="cart-btn" disabled={!user} onClick={handleClick}>
               <ShoppingCartOutlinedIcon />
               Add to cart
             </button>

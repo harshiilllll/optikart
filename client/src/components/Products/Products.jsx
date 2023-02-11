@@ -2,7 +2,7 @@ import ProductCard from "../ProductCard/ProductCard";
 import "./Products.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Loader from "../Loader/Loader";
 
 const Products = ({ category, filters, sort, clearFilters }) => {
