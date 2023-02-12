@@ -21,17 +21,16 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="top">
-        {/* <div className="item subscribe">
-          <h1>Stay in the know.</h1>
-          <input type="text" placeholder="Email" />
-          <button>Subscribe</button>
-        </div> */}
         <div className="item">
           <h1>Categories</h1>
-          {cats.map((cat) => (
+          {cats.slice(0, 4).map((cat) => (
             <span key={cat._id}>
-              <Link className="link" to={`products/${cat.cat}`}>
-                {cat.title}
+              <Link
+                className="link"
+                style={{ textTransform: "capitalize" }}
+                to={`products/${cat.cat}`}
+              >
+                {cat.cat}
               </Link>
             </span>
           ))}

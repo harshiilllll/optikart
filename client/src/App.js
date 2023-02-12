@@ -21,6 +21,7 @@ import About from "./pages/About/About";
 import { useCallback, useEffect } from "react";
 import { getCart, getSettings } from "./redux/apiCalls";
 import axios from "axios";
+import FixedBottomNavigation from "./components/FixedBottomNavigation";
 
 const App = () => {
   const user = useSelector((state) => state.user.user);
@@ -32,6 +33,7 @@ const App = () => {
         <Navbar />
         <Outlet />
         <Footer />
+        <FixedBottomNavigation />
       </div>
     );
   };
