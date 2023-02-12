@@ -46,10 +46,8 @@ const Sidebar = () => {
   const [selected, setSelected] = useState("Dashboard");
 
   useEffect(() => {
-    const elements = document.getElementsByClassName("content");
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].style.marginLeft = isCollapsed ? "80px" : "280px";
-    }
+    const elements = document.querySelector(".content");
+    elements.style.marginLeft = isCollapsed ? "80px" : "280px";
   }, [isCollapsed]);
 
   const user = useSelector((state) => state.user.user);

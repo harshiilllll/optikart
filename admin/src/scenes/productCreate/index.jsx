@@ -30,33 +30,50 @@ const ProductForm = () => {
   const colors = tokens(theme.palette.mode);
   const dispatch = useDispatch();
 
+  //For handling inputs of title, price, oldPrice, desc.
   const [input, setInputs] = useState({});
-  const [urls, seturls] = useState([]);
-  const [cat, setCat] = useState([]);
-  const [size, setSize] = useState([]);
-  const [color, setColor] = useState([]);
-  const [files, setFiles] = useState([]);
-
-  // console.log("Inputs:", input);
-  // console.log("Cat:", cat);
-  // console.log("Colors:", color);
-  // console.log("Images:", files);
-  // console.log("Urls:", urls);
-
   const handleChange = (e) => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
 
-  const handleColor = (e) => {
-    setColor(e.target.value.split(","));
+  //For handling category selection
+  const [cat, setCat] = useState([]);
+  const handleCatCheck = (e) => {
+    const value = e.target.value;
+    if (e.target.checked) {
+      setCat([...cat, value]);
+    } else {
+      setCat(cat.filter((e) => e !== value));
+    }
   };
 
-  const handleSize = (e) => {
-    setSize(e.target.value.split(","));
+  //For handling color selection
+  const [color, setColor] = useState([]);
+  const handleColorCheck = (e) => {
+    const value = e.target.value;
+    if (e.target.checked) {
+      setColor([...color, value]);
+    } else {
+      setColor(color.filter((e) => e !== value));
+    }
   };
 
+  //For handling size selection
+  const [size, setSize] = useState([]);
+  const handleSizeCheck = (e) => {
+    const value = e.target.value;
+    if (e.target.checked) {
+      setSize([...size, value]);
+    } else {
+      setSize(size.filter((e) => e !== value));
+    }
+  };
+  console.log(size);
+
+  //For selecting files i.e images
+  const [files, setFiles] = useState([]);
   const handleFileChange = (e) => {
     for (let i = 0; i < e.target.files.length; i++) {
       const newFile = e.target.files[i];
@@ -65,6 +82,8 @@ const ProductForm = () => {
     }
   };
 
+  //Upload to firebase and set image urls in img array
+  const [urls, seturls] = useState([]);
   const handleUpload = (e) => {
     e.preventDefault();
     const promises = [];
@@ -107,6 +126,7 @@ const ProductForm = () => {
       .catch((err) => console.log(err));
   };
 
+  //Add product to db
   const handleSubmit = (e) => {
     e.preventDefault();
     const product = {
@@ -117,22 +137,13 @@ const ProductForm = () => {
       img: urls,
     };
     console.log(product);
+    //Add product Function in apiCalls
     addProducts(product, dispatch);
     toast.success("Product Added Successfully!");
-    setInputs({});
   };
 
-  const handleCatCheck = (e) => {
-    const value = e.target.value;
-    if (e.target.checked) {
-      setCat([...cat, value]);
-    } else {
-      setCat(cat.filter((e) => e !== value));
-    }
-  };
-
+  //Fetch Categories and render in Category selection
   const [catValue, setCatValue] = useState([]);
-
   useEffect(() => {
     const getCats = async () => {
       const res = await axios.get("/categories");
@@ -189,21 +200,9 @@ const ProductForm = () => {
           required
           onChange={handleChange}
         />
-        <TextField
-          fullWidth
-          variant="filled"
-          type="text"
-          label="Colors"
-          placeholder="Seperate colors by comma ,"
-          name="color"
-          sx={{ gridColumn: "span 4" }}
-          inputProps={{ style: { textTransform: "lowercase" } }}
-          required
-          onChange={handleColor}
-        />
         <Box
           sx={{
-            gridColumn: "span 4",
+            gridColumn: "span 2",
             display: "flex",
             flexDirection: "column",
             maxHeight: "200px",
@@ -232,19 +231,117 @@ const ProductForm = () => {
             />
           ))}
         </Box>
-        <TextField
-          fullWidth
-          variant="filled"
-          type="text"
-          label="Size"
-          placeholder="Seperate sizes by comma ,"
-          name="size"
-          sx={{ gridColumn: "span 4" }}
-          inputProps={{ style: { textTransform: "lowercase" } }}
-          required
-          onChange={handleSize}
-        />
-
+        <Box
+          sx={{
+            gridColumn: "span 1",
+            display: "flex",
+            flexDirection: "column",
+            maxHeight: "200px",
+            overflowY: "auto",
+            bgcolor: colors.blueAccent[900],
+            borderRadius: "4px",
+            padding: "20px",
+          }}
+        >
+          <Typography variant="h5" sx={{ color: "#777" }}>
+            Select Color
+          </Typography>
+          <br />
+          <FormControlLabel
+            control={
+              <Checkbox
+                onChange={handleColorCheck}
+                value="red"
+                sx={{ "&.Mui-checked": { color: colors.blueAccent[200] } }}
+              />
+            }
+            label="Red"
+            sx={{ textTransform: "capitalize" }}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                onChange={handleColorCheck}
+                value="blue"
+                sx={{ "&.Mui-checked": { color: colors.blueAccent[200] } }}
+              />
+            }
+            label="Blue"
+            sx={{ textTransform: "capitalize" }}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                onChange={handleColorCheck}
+                value="yellow"
+                sx={{ "&.Mui-checked": { color: colors.blueAccent[200] } }}
+              />
+            }
+            label="yellow"
+            sx={{ textTransform: "capitalize" }}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                onChange={handleColorCheck}
+                value="green"
+                sx={{ "&.Mui-checked": { color: colors.blueAccent[200] } }}
+              />
+            }
+            label="Green"
+            sx={{ textTransform: "capitalize" }}
+          />
+        </Box>
+        <Box
+          sx={{
+            gridColumn: "span 1",
+            display: "flex",
+            flexDirection: "column",
+            maxHeight: "200px",
+            overflowY: "auto",
+            bgcolor: colors.blueAccent[900],
+            borderRadius: "4px",
+            padding: "20px",
+          }}
+        >
+          <Typography variant="h5" sx={{ color: "#777" }}>
+            Select Size
+          </Typography>
+          <br />
+          <FormControlLabel
+            control={
+              <Checkbox
+                onChange={handleSizeCheck}
+                value="small"
+                sx={{ "&.Mui-checked": { color: colors.blueAccent[200] } }}
+              />
+            }
+            label="Small"
+            sx={{ textTransform: "capitalize" }}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                onChange={handleSizeCheck}
+                value="medium"
+                sx={{ "&.Mui-checked": { color: colors.blueAccent[200] } }}
+              />
+            }
+            label="Medium"
+            sx={{ textTransform: "capitalize" }}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                onChange={handleSizeCheck}
+                value="large"
+                sx={{ "&.Mui-checked": { color: colors.blueAccent[200] } }}
+              />
+            }
+            label="Large"
+            sx={{ textTransform: "capitalize" }}
+          />
+        </Box>
         <input
           type="file"
           name="img"
