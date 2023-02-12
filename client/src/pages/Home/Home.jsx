@@ -7,7 +7,9 @@ import FeaturedProducts from "../../components/FeaturedProducts/FeaturedProducts
 import HomeCategories from "../../components/homeCategories/HomeCategories";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import ParallaxArea from "../../components/ParallaxArea/ParallaxArea";
+import Products from "../../components/Products/Products";
 import Slider from "../../components/Slider/Slider";
+import ProductList from "../ProductList/ProductList";
 
 const Home = () => {
   const [lists, setLists] = useState([]);

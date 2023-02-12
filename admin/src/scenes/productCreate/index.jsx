@@ -200,6 +200,7 @@ const ProductForm = () => {
           required
           onChange={handleChange}
         />
+        {/* //Select Categories */}
         <Box
           sx={{
             gridColumn: "span 2",
@@ -231,6 +232,7 @@ const ProductForm = () => {
             />
           ))}
         </Box>
+        {/* //Select colors */}
         <Box
           sx={{
             gridColumn: "span 1",
@@ -292,6 +294,7 @@ const ProductForm = () => {
             sx={{ textTransform: "capitalize" }}
           />
         </Box>
+        {/* //Select Size */}
         <Box
           sx={{
             gridColumn: "span 1",

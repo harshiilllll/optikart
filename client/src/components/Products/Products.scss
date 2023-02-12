@@ -1,13 +1,16 @@
 .products {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 40px;
-    gap: 40px;
+  padding: 40px 0;
 
-    h1{
-        font-size: 22px;
-        letter-spacing: 2px;
-    }
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  grid-auto-rows: auto;
+
+  grid-gap: 20px;
+
+  h1 {
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
 }

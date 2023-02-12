@@ -62,12 +62,6 @@ const Product = () => {
       });
   };
 
-  // console.log("Inputs:", input);
-  // console.log("Cat:", cat);
-  // console.log("Colors:", color);
-  // console.log("Images:", files);
-  // console.log("Urls:", urls);
-
   const handleChange = (e) => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
