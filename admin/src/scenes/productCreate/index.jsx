@@ -24,6 +24,7 @@ import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ProductForm = () => {
   const theme = useTheme();
@@ -152,6 +153,8 @@ const ProductForm = () => {
     getCats();
   }, []);
 
+  const navigate = useNavigate();
+
   return (
     <form style={{ margin: "20px" }} onSubmit={handleSubmit}>
       <Header title={`ADD PRODUCT`} subtitle="Create New Product" />
@@ -208,13 +211,31 @@ const ProductForm = () => {
             flexDirection: "column",
             maxHeight: "200px",
             overflowY: "auto",
-            bgcolor: colors.blueAccent[900],
+            bgcolor: "rgba(0,0,0, 0.1)",
             borderRadius: "4px",
             padding: "20px",
           }}
         >
-          <Typography variant="h5" sx={{ color: "#777" }}>
-            Select Categories
+          <Typography
+            variant="h5"
+            sx={{
+              color: "#777",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            Select Categories{" "}
+            <Button
+              onClick={() => navigate("/categories")}
+              sx={{
+                bgcolor: colors.greenAccent[300],
+                color: colors.greenAccent[900],
+                "&:hover": { bgcolor: colors.greenAccent[500] },
+              }}
+              variant="contained"
+            >
+              Add Category
+            </Button>
           </Typography>
           <br />
           {catValue.map((cat) => (
@@ -240,7 +261,7 @@ const ProductForm = () => {
             flexDirection: "column",
             maxHeight: "200px",
             overflowY: "auto",
-            bgcolor: colors.blueAccent[900],
+            bgcolor: "rgba(0,0,0, 0.1)",
             borderRadius: "4px",
             padding: "20px",
           }}
@@ -302,7 +323,7 @@ const ProductForm = () => {
             flexDirection: "column",
             maxHeight: "200px",
             overflowY: "auto",
-            bgcolor: colors.blueAccent[900],
+            bgcolor: "rgba(0,0,0, 0.1)",
             borderRadius: "4px",
             padding: "20px",
           }}
@@ -356,7 +377,7 @@ const ProductForm = () => {
         />
         <InputLabel
           htmlFor="img"
-          style={{
+          sx={{
             backgroundColor: colors.greenAccent[400],
             borderRadius: "4px",
             color: colors.primary[900],
@@ -366,6 +387,7 @@ const ProductForm = () => {
             alignItems: "center",
             gap: "5px",
             minWidth: "100px",
+            "&:hover": { bgcolor: colors.greenAccent[600] },
           }}
         >
           <AddToPhotosOutlined />

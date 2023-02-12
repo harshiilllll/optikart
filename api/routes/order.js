@@ -6,7 +6,7 @@ const {
   verifyTokenAndAuthorization,
 } = require("../verifyToken");
 
-//CREATE Order
+//CREATE ORDER
 router.post("/", verify, async (req, res) => {
   const newOrder = new Order(req.body);
   try {
@@ -17,11 +17,18 @@ router.post("/", verify, async (req, res) => {
   }
 });
 
-//UPDATE Order
-router.put("/:id", async (req, res) => {
+//UPDATE ORDER
+router.put("/", async (req, res) => {
   try {
-    const updatedOrder = await Order.findByIdAndUpdate(
-      req.params.id,
+    let query = {};
+    if (req.query.id) {
+      query = { _id: req.query.id };
+    } else if (req.query.userId) {
+      query = { userId: req.query.userId };
+    }
+
+    const updatedOrder = await Order.findOneAndUpdate(
+      query,
       {
         $set: req.body,
       },
@@ -33,7 +40,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-//DELETE Order
+//DELETE ORDER
 router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
     await Order.findByIdAndDelete(req.params.id);

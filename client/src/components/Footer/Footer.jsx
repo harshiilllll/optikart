@@ -1,11 +1,23 @@
 import { EmailRounded, PhoneIphoneRounded } from "@mui/icons-material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./footer.scss";
 import paymentImg from "../../img/payment.png";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Footer = () => {
   const brand = useSelector((state) => state.settings);
+
+  const [cats, setCats] = useState([]);
+  useEffect(() => {
+    const getCats = async () => {
+      const res = await axios.get("/categories");
+      setCats(res.data);
+    };
+    getCats();
+  }, []);
+
   return (
     <div className="footer">
       <div className="top">
@@ -16,10 +28,13 @@ const Footer = () => {
         </div> */}
         <div className="item">
           <h1>Categories</h1>
-          <span>Men</span>
-          <span>Women</span>
-          <span>Kids</span>
-          <span>New Arrivals</span>
+          {cats.map((cat) => (
+            <span key={cat._id}>
+              <Link className="link" to={`products/${cat.cat}`}>
+                {cat.title}
+              </Link>
+            </span>
+          ))}
         </div>
         <div className="item">
           <h1>Links</h1>

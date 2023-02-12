@@ -11,20 +11,16 @@
   }
 
   .images {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 0 40px;
     align-items: center;
     justify-content: center;
+    width: 100px;
 
     img {
-      width: 40vw;
+      height: 50px;
       object-fit: contain;
       transition: all 0.5s ease;
-      &:hover {
-        width: 42vw;
-      }
     }
   }
 

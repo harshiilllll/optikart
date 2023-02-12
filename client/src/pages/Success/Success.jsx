@@ -12,7 +12,7 @@ const Success = () => {
   useEffect(() => {
     const addProductsInOrder = async () => {
       try {
-        await axios.put("/orders/" + userId, {
+        await axios.put("/orders/?userId=" + userId, {
           product_info: cart.products.map((product) => ({
             productId: product._id,
             price: product.price,

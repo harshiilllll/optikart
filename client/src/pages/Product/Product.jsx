@@ -2,7 +2,6 @@ import "./Product.scss";
 import { useLocation } from "react-router-dom";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useEffect, useState } from "react";
@@ -39,13 +38,25 @@ const Product = () => {
 
   const user = useSelector((state) => state.user.user);
 
+  const [mainImg, setMainImg] = useState(item.img[0]);
+
   return (
     <>
       <div className="product">
-        <div className="images">
-          {item.img?.map((image) => (
-            <img key={image} src={image} alt="" />
-          ))}
+        <div style={{ flex: "1", display: "flex" }}>
+          <div className="images">
+            {item.img?.map((image) => (
+              <img
+                key={image}
+                src={image}
+                alt=""
+                onClick={() => setMainImg(image)}
+              />
+            ))}
+          </div>
+          <div className="mainImg">
+            <img src={mainImg} alt="" />
+          </div>
         </div>
         <div className="info">
           <h1 className="productTitle">{item.title}</h1>

@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { tokens } from "../../theme";
 import Button from "@mui/material/Button";
 
@@ -22,6 +22,7 @@ const Order = () => {
   const colors = tokens(theme.palette.mode);
   const [order, setOrder] = useState(null);
 
+  const navigate = useNavigate();
   const id = useParams().id;
 
   useEffect(() => {
@@ -55,7 +56,7 @@ const Order = () => {
     if (selectedOption === "") return;
 
     await axios.put(
-      "/orders/" + id,
+      "/orders?id=" + id,
       { delivery_status: selectedOption },
       {
         headers: {
@@ -66,6 +67,18 @@ const Order = () => {
         },
       }
     );
+  };
+
+  const handleDelete = async () => {
+    await axios.delete("/orders/" + id, {
+      headers: {
+        token:
+          "Bearer " +
+          JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).user
+            .accessToken,
+      },
+    });
+    navigate("/orders");
   };
 
   return (
@@ -133,6 +146,16 @@ const Order = () => {
                 }}
               >
                 SAVE
+              </Button>
+              <Button
+                onClick={handleDelete}
+                variant="outlined"
+                sx={{
+                  color: colors.redAccent[500],
+                  borderColor: colors.redAccent[500],
+                }}
+              >
+                DELETE
               </Button>
             </Box>
             <Box
