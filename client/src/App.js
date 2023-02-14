@@ -33,7 +33,7 @@ const App = () => {
         <Navbar />
         <Outlet />
         <Footer />
-        <FixedBottomNavigation />
+        <FixedBottomNavigation /> 
       </div>
     );
   };
