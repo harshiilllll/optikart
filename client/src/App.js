@@ -35,7 +35,7 @@ const App = () => {
         <Footer />
         <FixedBottomNavigation /> 
       </div>
-    );
+    ); 
   };
 
   const router = createBrowserRouter([
