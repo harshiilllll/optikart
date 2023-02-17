@@ -1,12 +1,18 @@
 import { useTheme } from "@emotion/react";
-import { TextField, Button } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Typography,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import Header from "../../components/Header";
 import { getLists, updateList } from "../../redux/apiCalls";
 import { tokens } from "../../theme";
@@ -23,32 +29,35 @@ const List = () => {
   );
   const products = useSelector((state) => state.products.products);
 
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState({ content: [] });
 
   const handleChange = (e) => {
     const value = e.target.value;
     setContent({ ...content, [e.target.name]: value });
   };
 
-  const handleSelect = (e) => {
-    let value = Array.from(e.target.selectedOptions, (option) => option.value);
-    setContent({ ...content, [e.target.name]: value });
+  const handleProductSelect = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setContent({ ...content, content: [...content.content, value] });
+    } else {
+      setContent({
+        ...content,
+        content: content.content.filter((item) => item !== value),
+      });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let updatedList = {};
-    for (const [key, value] of Object.entries(content)) {
-      if (content[key] !== value && key !== "title") {
-        updatedList[key] = value;
-      }
-    }
-    updatedList = { ...content, ...updatedList };
+    const updatedList = content;
     updateList(id, updatedList, dispatch);
+    toast.success("List updated")
   };
 
   useEffect(() => {
     getLists(dispatch);
+    setContent({ ...content, _id: id });
   }, [dispatch]);
 
   console.log(content);
@@ -76,31 +85,46 @@ const List = () => {
           sx={{ gridColumn: "span 2" }}
           onChange={handleChange}
         />
-        <select
-          style={{
-            width: "100%",
-            height: "200px",
-            padding: "10px",
-            fontSize: "16px",
-            backgroundColor: colors.blueAccent[900],
-            color: colors.primary[100],
+        <Box
+          sx={{
+            gridColumn: "span 4",
+            display: "flex",
+            flexDirection: "column",
+            maxHeight: "200px",
+            overflowY: "auto",
+            bgcolor: colors.blueAccent[900],
             borderRadius: "4px",
-            border: "none",
-            borderBottomLeftRadius: "0px",
-            borderBottomRightRadius: "0px",
-            borderBottom: "1px solid #eee",
+            padding: "20px",
           }}
-          multiple
-          name="content"
-          id="content"
-          onChange={handleSelect}
         >
+          <Typography variant="subtitle1" sx={{ color: "#777" }}>
+            Select Products
+          </Typography>
+          <br />
           {products.map((product) => (
-            <option key={product?._id} value={product?._id}>
-              {product?.title}
-            </option>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <FormControlLabel
+                key={product._id}
+                control={
+                  <Checkbox
+                    onChange={handleProductSelect}
+                    value={product._id}
+                    sx={{ "&.Mui-checked": { color: colors.blueAccent[200] } }}
+                  />
+                }
+                label={product.title}
+                sx={{ textTransform: "capitalize" }}
+              />
+              <Typography variant="body1">Rs.{product.price}</Typography>
+            </Box>
           ))}
-        </select>
+        </Box>
       </Box>
       <Button
         sx={{ marginTop: "20px" }}
@@ -109,7 +133,7 @@ const List = () => {
         variant="contained"
         onClick={handleSubmit}
       >
-        CREATE
+        UPDATE
       </Button>
       <ToastContainer />
     </form>

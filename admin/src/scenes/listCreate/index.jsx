@@ -21,13 +21,14 @@ const CreateList = () => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products.products);
+  
+  const [content, setContent] = useState({ content: [] });
 
   const handleChange = (e) => {
     const value = e.target.value;
     setContent({ ...content, [e.target.name]: value });
   };
 
-  const [content, setContent] = useState({ content: [] });
 
   const handleProductSelect = (e) => {
     const { value, checked } = e.target;

@@ -66,10 +66,15 @@ const listSlice = createSlice({
     },
     updateListSuccess(state, action) {
       state.isFetching = false;
-      state.lists[
-        state.lists.findIndex((item) => item._id === action.payload.id)
-      ] = action.payload.updatedlist;
+      const index = state.lists.findIndex(
+        (item) => item._id === action.payload.id
+      );
+      state.lists[index] = {
+        ...state.lists[index],
+        ...action.payload.updatedList,
+      };
     },
+
     updateListFailure(state) {
       state.isFetching = false;
       state.error = true;
