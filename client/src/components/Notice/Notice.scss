@@ -10,5 +10,13 @@
   font-size: 14px;
   text-align: center;
   padding: 5px;
+  position: relative;
+
+  .closeIcon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+  }
 }
 

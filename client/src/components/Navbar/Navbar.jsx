@@ -7,6 +7,7 @@ import {
   KeyboardArrowRight,
   Search,
   CloseOutlined,
+  Close,
 } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -14,6 +15,7 @@ import LOGO from "../../img/LOGO.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/userRedux";
 import { useRef } from "react";
+import CartPopup from "../CartPopup/CartPopup";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user.user);
@@ -90,6 +92,8 @@ const Navbar = () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
   }, [isOpenSearch]);
+
+  const [cartPopup, setCartPopup] = useState(false);
 
   return (
     <>
@@ -170,7 +174,11 @@ const Navbar = () => {
               />
               <FavoriteBorderOutlined className="icon" />
               <div className="cart-icon">
-                <Link to="/cart" className="link">
+                <Link
+                  to="/"
+                  onClick={() => setCartPopup(!cartPopup)}
+                  className="link"
+                >
                   <ShoppingCartOutlined className="icon" />
                   {quantity > 0 && <span> </span>}
                 </Link>
@@ -300,6 +308,13 @@ const Navbar = () => {
           )}
         </nav>
       </nav>
+      <div className={cartPopup ? "cartPopupArea opened" : "cartPopupArea"}>
+        <CartPopup />
+        <Close
+          className={cartPopup ? "closeIcon opened" : "closeIcon"}
+          onClick={() => setCartPopup(!cartPopup)}
+        />
+      </div>
     </>
   );
 };
