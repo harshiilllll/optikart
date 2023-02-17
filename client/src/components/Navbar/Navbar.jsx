@@ -130,8 +130,8 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="item">
-              <Link className="link" to="/products/kids" title="Kids">
-                Kids
+              <Link className="link" to="/products" title="Kids">
+                All Products
               </Link>
             </li>
           </ul>

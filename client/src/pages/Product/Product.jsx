@@ -39,23 +39,40 @@ const Product = () => {
   const user = useSelector((state) => state.user.user);
 
   const [mainImg, setMainImg] = useState(item.img[0]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // const handlePrevClick = () => {
+  //   const index = (activeIndex - 1 + item.img.length) % item.img.length;
+  //   setMainImg(item.img[index]);
+  //   setActiveIndex(index);
+  // };
+
+  // const handleNextClick = () => {
+  //   const index = (activeIndex + 1) % item.img.length;
+  //   setMainImg(item.img[index]);
+  //   setActiveIndex(index);
+  // };
 
   return (
     <>
       <div className="product">
-        <div style={{ flex: "1", display: "flex" }}>
+        <div className="imgSide">
+          <div className="mainImg">
+            <img src={mainImg} alt=""  />
+          </div>
           <div className="images">
-            {item.img?.map((image) => (
+            {item.img?.map((image, index) => (
               <img
                 key={image}
                 src={image}
                 alt=""
-                onClick={() => setMainImg(image)}
+                onClick={() => {
+                  setMainImg(image);
+                  setActiveIndex(index);
+                }}
+                className={activeIndex === index ? "active" : ""}
               />
             ))}
-          </div>
-          <div className="mainImg">
-            <img src={mainImg} alt="" />
           </div>
         </div>
         <div className="info">

@@ -10,17 +10,46 @@
     flex-direction: column;
   }
 
-  .images {
+  .imgSide {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100px;
+    flex-direction: column;
+    flex: 1;
+    padding: 40px;
+    gap: 20px;
+
+    .mainImg {
+      display: flex;
+      justify-content: center;
+      background: #f6f6f6;
+      width: 100%;
+      height: 50vh;
+
+      img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  .images {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 5px;
 
     img {
       height: 50px;
       object-fit: contain;
-      transition: all 0.5s ease;
+      transition: all 0.1s ease;
+
+
+      &.active {
+        outline: 2px solid var(--accent-color);
+      }
     }
   }
 
@@ -152,7 +181,6 @@
         color: white;
         padding: 10px 10px;
         border-radius: 50%;
-
 
         &:hover {
           background-color: transparent;

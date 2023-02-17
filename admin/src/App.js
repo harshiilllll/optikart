@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
@@ -15,7 +15,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
 import Login from "./scenes/login";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Products from "./scenes/products";
 import Product from "./scenes/product";
 import ProductForm from "./scenes/productCreate";
@@ -25,12 +25,18 @@ import CreateList from "./scenes/listCreate";
 import Orders from "./scenes/orders/Orders";
 import Order from "./scenes/orders/Order";
 import Categories from "./scenes/categories";
+import { getProducts } from "./redux/apiCalls";
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
 
   const user = useSelector((state) => state.user.user);
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    getProducts(dispatch);
+  }, [dispatch]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
