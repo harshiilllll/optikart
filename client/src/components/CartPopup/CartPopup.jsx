@@ -9,7 +9,7 @@ const CartPopup = () => {
     <div className="cartPopup">
       <h1>Cart</h1>
       <div className="products">
-        {cart.products.map((product) => (
+        {cart?.products?.map((product) => (
           <div key={product._id}>
             <img src={product.img[0]} alt="" />
             {product.title}
