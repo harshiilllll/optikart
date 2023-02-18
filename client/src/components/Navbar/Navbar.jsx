@@ -174,14 +174,10 @@ const Navbar = () => {
               />
               <FavoriteBorderOutlined className="icon" />
               <div className="cart-icon">
-                <Link
-                  to="/"
-                  onClick={() => setCartPopup(!cartPopup)}
-                  className="link"
-                >
+                <div onClick={() => setCartPopup(!cartPopup)}>
                   <ShoppingCartOutlined className="icon" />
                   {quantity > 0 && <span> </span>}
-                </Link>
+                </div>
               </div>
             </div>
           </ul>
