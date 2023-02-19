@@ -408,7 +408,7 @@
 .wishPopupArea {
   position: fixed;
   top: 0;
-  right: -100%;
+  right: -100vw;
   min-height: 100vh;
   transition: 0.3s;
   z-index: 1000;

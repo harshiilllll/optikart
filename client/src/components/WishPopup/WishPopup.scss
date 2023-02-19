@@ -1,9 +1,15 @@
+@import '../../app.scss';
+
 .wishPopup {
   padding: 10px;
   background-color: white;
   min-height: 100vh;
   width: 400px;
   position: relative;
+
+  @include tablet {
+    width: 100%;
+  }
 
   .products {
     height: 90vh;
