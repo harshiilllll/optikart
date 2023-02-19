@@ -45,17 +45,15 @@ const Cart = () => {
                   <div className="product-detail">
                     <img src={item.img[0]} alt="" />
                     <div className="details">
-                      <div className="prouduct-name">
-                        <b>Product:</b> {item.title}
-                      </div>
-                      <div className="product-id">
-                        <b>Id:</b> {item._id}
-                      </div>
-                      <div className="product-price">
-                        <b>Price:</b> Rs. {item.price}/Piece
-                      </div>
-                      <div className="product-size">
-                        <b>Size:</b> {item.size}
+                      <div className="product-name">{item.title}</div>
+                      <div className="product-desc">{item.desc}</div>
+                      <div style={{ display: "flex", gap: "5px" }}>
+                        <div className="product-price">
+                          <b>Price:</b> Rs. {item.price}/Piece
+                        </div>
+                        <div className="product-size">
+                          <b>Size:</b> {item.size}
+                        </div>
                       </div>
                       <div
                         className="product-color"
@@ -90,28 +88,28 @@ const Cart = () => {
               </div>
             ))}
           </div>
-          {cart.products.length > 0 && (
-            <div className="summary">
-              <h1 className="summary-title">Order Summary</h1>
-              <div className="summary-item">
-                <span className="summary-item-text">Subtotal</span>
-                <span className="summary-item-text">Rs. {cart.totalPrice}</span>
-              </div>
-              <div className="summary-item">
-                <span className="summary-item-text">Estimated Shipping</span>
-                <span className="summary-item-text">Rs. 50</span>
-              </div>
-              <div className="summary-item">
-                <span className="summary-item-text">Shipping Discount</span>
-                <span className="summary-item-text">Rs. -50</span>
-              </div>
-              <div className="summary-item total">
-                <span className="summary-item-text">Total</span>
-                <span className="summary-item-text">Rs. {cart.totalPrice}</span>
-              </div>
-              <PaymentButton className="checkout-btn" cart={cart} />
+          {/* {cart.products.length > 0 && ( */}
+          <div className="summary">
+            <h1 className="summary-title">Order Summary</h1>
+            <div className="summary-item">
+              <span className="summary-item-text">Subtotal</span>
+              <span className="summary-item-text">Rs. {cart.totalPrice}</span>
             </div>
-          )}
+            <div className="summary-item">
+              <span className="summary-item-text">Estimated Shipping</span>
+              <span className="summary-item-text">Rs. 50</span>
+            </div>
+            <div className="summary-item">
+              <span className="summary-item-text">Shipping Discount</span>
+              <span className="summary-item-text">Rs. -50</span>
+            </div>
+            <div className="summary-item total">
+              <span className="summary-item-text">Total</span>
+              <span className="summary-item-text">Rs. {cart.totalPrice}</span>
+            </div>
+            <PaymentButton className="checkout-btn" cart={cart} />
+          </div>
+          {/* )} */}
         </div>
       </div>
       <Anouncement />

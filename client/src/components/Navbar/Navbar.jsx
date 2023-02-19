@@ -15,7 +15,7 @@ import LOGO from "../../img/LOGO.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/userRedux";
 import { useRef } from "react";
-import CartPopup from "../CartPopup/CartPopup";
+import WishPopup from "../WishPopup/WishPopup";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user.user);
@@ -93,7 +93,7 @@ const Navbar = () => {
     };
   }, [isOpenSearch]);
 
-  const [cartPopup, setCartPopup] = useState(false);
+  const [wishPopup, setWishPopup] = useState(false);
 
   return (
     <>
@@ -172,13 +172,16 @@ const Navbar = () => {
                 className="icon"
                 onClick={() => setIsOpenSearch(!isOpenSearch)}
               />
-              <FavoriteBorderOutlined className="icon" />
-              <div className="cart-icon">
-                <div onClick={() => setCartPopup(!cartPopup)}>
+              <FavoriteBorderOutlined
+                onClick={() => setWishPopup(!wishPopup)}
+                className="icon"
+              />
+              <Link to="/cart" className="cart-icon">
+                <div>
                   <ShoppingCartOutlined className="icon" />
                   {quantity > 0 && <span> </span>}
                 </div>
-              </div>
+              </Link>
             </div>
           </ul>
         </div>
@@ -304,11 +307,11 @@ const Navbar = () => {
           )}
         </nav>
       </nav>
-      <div className={cartPopup ? "cartPopupArea opened" : "cartPopupArea"}>
-        <CartPopup />
+      <div className={wishPopup ? "wishPopupArea opened" : "wishPopupArea"}>
+        <WishPopup />
         <Close
-          className={cartPopup ? "closeIcon opened" : "closeIcon"}
-          onClick={() => setCartPopup(!cartPopup)}
+          className={wishPopup ? "closeIcon opened" : "closeIcon"}
+          onClick={() => setWishPopup(!wishPopup)}
         />
       </div>
     </>
