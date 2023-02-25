@@ -51,11 +51,11 @@ const Footer = () => {
         <div className="item contact-footer">
           <h1>Contact</h1>
           <p>{brand.address}</p>
-          <a className="link" href="mailto:">
+          <a className="link" href={`mailto:${brand.brandEmail}`}>
             <EmailRounded />
             {brand.brandEmail}
           </a>
-          <a className="link" href="tel:">
+          <a className="link" href={`tel:${brand.brandNumber}`}>
             <PhoneIphoneRounded />
             {brand.brandNumber}
           </a>
